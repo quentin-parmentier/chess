@@ -1,0 +1,115 @@
+{
+    "white":{
+        "1" : {
+            "id":1,
+            "name":"Système de Londres",
+            "commentaire": "Une ouverture facile avec d4",
+            "img":"https://cdn2.civitatis.com/reino-unido/londres/guia/distritos.jpg",
+            "variantes":{
+                "v1":{
+                    "id":7603032,
+                    "name":"Développement basique",
+                    "commentaire":"Développement simple, les premiers coups et les attaques possibles"
+                }
+                ,"v2":{
+                    "id":7593016,
+                    "name":"Fou blanc f5 (Sort de la structure)",
+                    "commentaire":"Mauvaise défense → b6 <br> Bonne défense → Dc8"
+                }
+                ,"v4":{
+                    "id":7572774,
+                    "name":"Échange d4",
+                    "commentaire":"Sépare l'échiquier en deux → On met tout sur le roi <br> Ne pas oublier de mettre 2 protections sur le cavalier e5 <br> Grand roque"
+                }
+                ,"v5":{
+                    "id":7586348,
+                    "name":"Échange fxg3 xg3 → Cxc5",
+                    "commentaire":"Colonne h ouverte <br> Sacrifice Tour pour déplacer la Dame sur échec"
+                }
+                ,"v6":{
+                    "id":7586358,
+                    "name":"Échange fxg3 xg3 → ..Db4+",
+                    "commentaire":"Sacrifice du fou Fxh7 <br> Attaque Tour-Dame"
+                }
+                ,"v7":{
+                    "id":7586380,
+                    "name":"Échange fxg3 xg3 → g6",
+                    "commentaire":"Coupe la diagonale <br> Clouage du pion g6 ou sacrifice de tour"
+                }
+                ,"v8":{
+                    "id":7586472,
+                    "name":"Échange fxg3 xg3 → Cavalier prend pas Cxc5",
+                    "commentaire":"On prend le cavalier Cxd7 pour éviter qu'il revienne en f6 menacer la Dame <br> On peut attaquer avec Tour-Dame <br> Si bonne défense on doit ramener plus de matériel"
+                }
+                ,"v9":{
+                    "id":7572316,
+                    "name":"Échange fxg3 xg3 → h6",
+                    "commentaire":"Batterie Fou-Dame <br> Poussée du pion g"
+                }
+                ,"v12":{
+                    "id":7583668,
+                    "name":"Fou noir n'échange pas",
+                    "commentaire":"On suit le plan"
+                }
+                ,"v15":{
+                    "id":7584054,
+                    "name":"Pas d'échange de fou → 4 menaces sur le cavalier → f4",
+                    "commentaire":"Comprendre le pion f4 <br> Roc lift"
+                }
+                ,"v10":{
+                    "id":7577770,
+                    "name":"Fe7 → h4",
+                    "commentaire":"Si le fou noir ne joue pas on pousse h4 pour faire passer la tour et faire bélier"
+                }
+                ,"v11":{
+                    "id":7583576,
+                    "name":"Fe7 gagne un pion ou une position",
+                    "commentaire":"Jeu plus propre et posé, mais moins de gain possible à court terme"
+                }
+                ,"v13":{
+                    "id":7572724,
+                    "name":"Semi slav",
+                    "commentaire":"Partie entière <br> Contrôler e5 et on pousse tous les pions"
+                }
+                ,"v16":{
+                    "id":7594746,
+                    "name":"Indian's king → On quitte le système",
+                    "commentaire":"Les noirs ne jouent pas d5 <br> On joue le contrôle de e5 <br> On va échanger le Fou de cases noires"
+                }
+                ,"v14":{
+                    "id":7629118,
+                    "name":"Grunfeld → On quitte le système",
+                    "commentaire":"C'est une king indian avec d5 <br> Cc3 → Grand roque → Pousse le pion h <br> On joue avec Cavalier-Tour-Dame"
+                }
+                ,"v17":{
+                    "id":"study/embed/N8VPI5Vm/AyhASntY",
+                    "name":"Les erreurs dans le système de Londres !",
+                    "commentaire":"Attention à ces erreurs <br> Cf4 trop tôt <br> Jouer la pyramide contre g6 Fg7 <br> Ne pas contrôler la case e5",
+                    "origine":"lichess"
+                }
+                ,"v18":{
+                    "id":"study/embed/NzwDzKqw/uaohg1W6",
+                    "name":"Anti London System",
+                    "commentaire":"Toutes les attaques et la défense possible contre c6 ..g5",
+                    "origine":"lichess"
+                }
+            }
+            
+        }
+    },
+    "black":{
+        "1" : {
+            "id":1,
+            "name":"Est indienne",
+            "commentaire": "Début blanc d4 Cf6",
+            "img":"https://image.freepik.com/vecteurs-libre/fille-indienne-amerindienne-dessin-anime_29190-5451.jpg",
+            "variantes":{
+                "v1":{
+                    "id":7638696,
+                    "name":"Gligoric - Najdorf",
+                    "commentaire":"Comment attaquer le roi adverse <br> Jouer pour g4 et matter"
+                }
+            }    
+        }
+    }
+}
