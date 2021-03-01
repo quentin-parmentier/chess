@@ -22,7 +22,10 @@ module.exports = {
       backgroundImage: {
         'arrow_back': "url('./assets/img/arrow_back.svg')",
         'whitepiece': "url('./assets/img/white.svg')",
-        'blackpiece': "url('./assets/img/black.svg')"
+        'blackpiece': "url('./assets/img/black.svg')",
+        'finale': "url('./assets/img/finale.svg')",
+        'ouverture': "url('./assets/img/ouverture.svg')",
+        'pion': "url('./assets/img/pion.svg')",
       },
       backgroundSize: {
         'icon-left':"20px",

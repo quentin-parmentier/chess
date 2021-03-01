@@ -12,7 +12,7 @@
                     "commentaire":"Développement simple, les premiers coups et les attaques possibles"
                 }
                 ,"v2":{
-                    "id":7593016,
+                    "id":7649614,
                     "name":"Fou blanc f5 (Sort de la structure)",
                     "commentaire":"Mauvaise défense → b6 <br> Bonne défense → Dc8"
                 }
@@ -81,6 +81,11 @@
                     "name":"Grunfeld → On quitte le système",
                     "commentaire":"C'est une king indian avec d5 <br> Cc3 → Grand roque → Pousse le pion h <br> On joue avec Cavalier-Tour-Dame"
                 }
+                ,"v19":{
+                    "id":7642890,
+                    "name":"Face à Cc6",
+                    "commentaire":"Plusieurs solution, accepter de jouer une finale ou bloquer la position ?"
+                }
                 ,"v17":{
                     "id":"study/embed/N8VPI5Vm/AyhASntY",
                     "name":"Les erreurs dans le système de Londres !",
@@ -92,6 +97,85 @@
                     "name":"Anti London System",
                     "commentaire":"Toutes les attaques et la défense possible contre c6 ..g5",
                     "origine":"lichess"
+                }
+            }
+            
+        },
+        "2" : {
+            "id":2,
+            "name":"Jobava attack",
+            "commentaire": "Une ouverture plus complexe avec d4",
+            "img":"https://cdn2.civitatis.com/reino-unido/londres/guia/distritos.jpg",
+            "variantes":{
+                "v1":{
+                    "id":7648226,
+                    "name":"Développement basique d4 d5",
+                    "commentaire":"Développement simple <br> Une meilleure position"
+                },
+                "v99":{
+                    "id":7649636,
+                    "name":"Développement basique d4 d5..c5 x d4",
+                    "commentaire":"Développement simple <br> Beaucoup d'idée et de méchanisme automatique"
+                },
+                "v2":{
+                    "id":7646346,
+                    "name":"Gambit pion : d4 d5 c3 c5",
+                    "commentaire":"On va pousser notre pion et se développer fort pour faire des menaces"
+                },
+                "v3":{
+                    "id":7649680,
+                    "name":"d4 d5 : Sortie du fou blanc",
+                    "commentaire":"Repousse le fou <br> Pawn storm l'aile roi"
+                },
+                "v4":{
+                    "id":7648244,
+                    "name":"d4 d5 : Capture du pion d4",
+                    "commentaire":"Grand roque <br> Pawn storm l'aile roi"
+                },
+                "v5":{
+                    "id":7645576,
+                    "name":"a6 + c5",
+                    "commentaire":"Casser la structure <br> Continuer à bloquer le fou case blanche <br> Echanger les pièces"
+                },
+                "v6":{
+                    "id":7645972,
+                    "name":"a6 + Fe7",
+                    "commentaire":"Même idées que dans le système de Londres <br> Jouer pour e5"
+                },
+                "v7":{
+                    "id":7647852,
+                    "name":"a6 → .. g4 h4",
+                    "commentaire":"On décide d'attaquer très fort l'aile roi <br> Pousse g et h"
+                },
+                "v8":{
+                    "id":7647948,
+                    "name":"Old benoni (c5)",
+                    "commentaire":"On pousse d5 <br> Deux plans pour les noirs e6 et b5"
+                },
+                "v9":{
+                    "id":7648038,
+                    "name":"Deutch games (d4 f5)",
+                    "commentaire":"Pawn break <br> Développement rapide avec attaque du roi"
+                },
+                "v10":{
+                    "id":7649478,
+                    "name":"French defense (d4 e6..d5)",
+                    "commentaire":"Le plus simple est de prendre en exd5 <br> Se développer et roquer côté roi"
+                },
+                "v11":{
+                    "id":7649566,
+                    "name":"d5 g6",
+                    "commentaire":"Comme dans la grunfeld roque opposé et attaque du fou fianchetto"
+                }
+                ,"v12":{
+                    "id":7594746,
+                    "name":"Indian's king → Partie du london système",
+                    "commentaire":"Les noirs ne jouent pas d5 <br> On joue le contrôle de e5 <br> On va échanger le Fou de cases noires"
+                }
+                ,"v13":{
+                    "id":7629118,
+                    "name":"Grunfeld → Partie du london système",
+                    "commentaire":"C'est une king indian avec d5 <br> Cc3 → Grand roque → Pousse le pion h <br> On joue avec Cavalier-Tour-Dame"
                 }
             }
             
@@ -108,6 +192,38 @@
                     "id":7638696,
                     "name":"Gligoric - Najdorf",
                     "commentaire":"Comment attaquer le roi adverse <br> Jouer pour g4 et matter"
+                }
+            }    
+        },
+        "2" : {
+            "id":2,
+            "name":"Caro Kann",
+            "commentaire": "Début blanc e4",
+            "img":"https://image.freepik.com/vecteurs-libre/fille-indienne-amerindienne-dessin-anime_29190-5451.jpg",
+            "variantes":{
+                "v1":{
+                    "id":"study/embed/gjqSTfa8/BIRjoEum",
+                    "name":"Variante d'avance",
+                    "commentaire":"Les blancs poussent le pion en e5",
+                    "origine":"lichess"    
+                }
+                ,"v2":{
+                    "id":"study/embed/gjqSTfa8/qTBXEcyY",
+                    "name":"Variante d'échange",
+                    "commentaire":"Les blancs prennent le pion d5",
+                    "origine":"lichess"    
+                }
+                ,"v3":{
+                    "id":"study/embed/gjqSTfa8/CXCN0GfS",
+                    "name":"Attaque Panov",
+                    "commentaire":"Variante d'échange avec 4. c4",
+                    "origine":"lichess"    
+                }
+                ,"v4":{
+                    "id":"study/embed/gjqSTfa8/Cspc79P5",
+                    "name":"Classique version",
+                    "commentaire":"Les pions du milieu ne bouge pas",
+                    "origine":"lichess"    
                 }
             }    
         }

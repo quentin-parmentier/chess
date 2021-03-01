@@ -6,11 +6,11 @@
 			</div>
 			<div class=" self-center flex-1 pr-24">
 				<h2 class="text-2xl font-bold text-center m-8"> 
-					{{ouverture.name}}
+					{{etude.name}}
 				</h2>
 			</div>
 		</div>
-		<div v-for="(variante,index) in ouverture['variantes']" :key="index" class="mb-4" > 
+		<div v-for="(variante,index) in etude['variantes']" :key="index" class="mb-4" > 
 			<variante :variante="variante" />
 		</div>
 	</div>
@@ -26,11 +26,15 @@ export default {
   },
 	components: { Variante,BaseButton },
 	created () {
-		this.ouverture = inject('ouvertures')['ouvertures'][this.$route.params.color][this.$route.params.ouverture]
+		if(this.$route.params.type == 'ouvertures'){
+			this.etude = inject('ouvertures')[this.$route.params.type][this.$route.params.color][this.$route.params.id]
+		}else{
+			this.etude = inject('finales')[this.$route.params.type][this.$route.params.id]
+		}
 	},
 	data () {
 		return {
-			ouverture : null
+			etude : null
 		}
 	},
 }

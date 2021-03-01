@@ -4,15 +4,18 @@
 
 <script>
 import { provide } from 'vue'
-import json from './ouvertures/ouvertures.json'
-import {createOuvertures} from './store'
+
+import jsonOuverture from './ouvertures/ouvertures.json'
+import jsonFinales from './ouvertures/finales.json'
+import {createOuvertures, createFinales} from './store'
 export default {
   created () {
-    const {store,setOuvertures} = createOuvertures()
-    provide('ouvertures',store)
-    setOuvertures(json)
-    console.log(store['ouvertures'])
+    const {storeOuvertures,setOuvertures} = createOuvertures()
+    provide('ouvertures',storeOuvertures)
+    setOuvertures(jsonOuverture)
+    const {storeFinales,setFinales} = createFinales()
+    provide('finales',storeFinales)
+    setFinales(jsonFinales)
   }
-  
 }
 </script>

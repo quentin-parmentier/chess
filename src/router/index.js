@@ -4,24 +4,40 @@ import Home from '../views/Home.vue'
 const routes = [
   {
     path: '/',
-    name: 'ColorChoice',
+    name: 'Themes',
     component: Home
   },
   {
-    path: '/ouvertures/:color',
+    path: '/ouvertures',
     name: 'Color',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Color.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/ChoixColor.vue')
   },
   {
-    path: '/ouverture/:color/:ouverture',
+    path: '/finales',
+    name: 'Finales',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/ChoixFinales.vue')
+  },
+  {
+    path: '/ouvertures/:color',
+    name: 'Ouvertures',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/ChoixOuverture.vue')
+  },
+  {
+    path: '/:type/:color/:id',
     name: 'Variantes',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Variantes.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/ChoixVariantes.vue')
   }
 ]
 

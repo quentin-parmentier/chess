@@ -1,5 +1,5 @@
 <template lang="">
-    <router-link :to="{ name: 'Variantes', params: {ouverture:index, color:color}}" @mouseover="() => this.isHover = true" @mouseout="() => this.isHover = false">
+    <router-link :to="{ name: 'Variantes', params: {id:index, color:color, type:'ouvertures'}}" @mouseover="() => this.isHover = true" @mouseout="() => this.isHover = false">
       <div class="h-28 flex rounded-md border-2 border-solid border-gray-400 shadow-basic">
 
         <div class=" h-full w-28">

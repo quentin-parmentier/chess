@@ -1,8 +1,7 @@
 <template lang="">
-    <div class=" cursor-pointer transform transition duration-300 h-full p-4 border-gray-50 border-solid border-2 rounded-2xl shadow-basic hover:-translate-y-3 hover:shadow-up">
+    <div class=" cursor-pointer transform transition duration-300 h-full p-4 border-gray-50 border-solid border-2 rounded-2xl shadow-basic hover:-translate-y-3 hover:shadow-up max-w-md">
       <div 
-        :class=" 'bg-'+color+'piece bg-contain bg-no-repeat bg-center h-full '">
-          
+        :class=" 'bg-'+img+' bg-contain bg-no-repeat bg-center h-full'">  
       </div>
     </div>
     
@@ -10,7 +9,7 @@
 <script>
 export default {
   props: {
-    color: { 
+    img: { 
       type: String,
       default: '',
       required: true
