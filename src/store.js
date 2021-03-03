@@ -13,3 +13,9 @@ export const createFinales = () => {
   
   return {setFinales, storeFinales : readonly(state)}
 }
+
+export const server = () => {
+  const state = "http://localhost:3000"
+
+  return {urlserv : readonly(state)}
+}

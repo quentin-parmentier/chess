@@ -7,7 +7,8 @@ import { provide } from 'vue'
 
 import jsonOuverture from './ouvertures/ouvertures.json'
 import jsonFinales from './ouvertures/finales.json'
-import {createOuvertures, createFinales} from './store'
+import {createOuvertures, createFinales, server} from './store'
+const axios = require('axios');
 export default {
   created () {
     const {storeOuvertures,setOuvertures} = createOuvertures()
@@ -16,6 +17,18 @@ export default {
     const {storeFinales,setFinales} = createFinales()
     provide('finales',storeFinales)
     setFinales(jsonFinales)
+    const urlserv = server().urlserv
+    provide('urlserv',urlserv)
+
+    axios.get(urlserv)
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
   }
 }
 </script>
