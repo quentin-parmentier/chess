@@ -16,5 +16,9 @@ app.use(cors(corsOptions))
 const authRoutes = require('./routes/auth.js')
 app.use('/', authRoutes)
 
+app.get('*', (req,res) => {
+    res.status(404).json({message:"Not found"})
+})
+
 //Listener
 app.listen(4000)

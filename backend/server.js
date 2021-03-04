@@ -13,7 +13,8 @@ const corsOptions = {
 //Middleware
 app.use(bodyParser.json())
 app.use(cors(corsOptions))
-
+//Middleware pour jwt
+//Middleware pour valider l'iduser id.match(/^[0-9a-fA-F]{24}$/)
 //Routes
 const usersRoutes = require('./routes/users.js')
 app.use('/users', usersRoutes)

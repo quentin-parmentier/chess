@@ -24,26 +24,23 @@ router.post('/', async (req, res) => {
     const datas = req.body
     connect()
     const myUser = await User.findOne({ _id: datas.iduser })
-    if(myUser !== null){
-        if(myUser.ouvertures === undefined){
-            myUser.ouvertures = new Ouverture()
-        }
-        if(datas.color && (datas.color === 'white' || datas.color === 'black')){
-            const colorAdd = datas.color
-            const newOppening = new ColorOuverture({
-                 name: datas.name
-                ,commentaire: datas.commentaire
-                ,img: datas.img
-            })
-            myUser.ouvertures[colorAdd].push(newOppening)
-            myUser.save()
-            res.status(201).json({message : 'Ouverture créée'})
-        }else{
-            res.status(400).json({message : 'Couleur non valide'})
-        }
-    }else{
-        res.status(400).json({message : 'Utilisateur non trouvé'})
-    }
+
+    //Est-ce que notre utilisateur existe ?
+    if(myUser === null) return res.status(401).json({message : 'Utilisateur non trouvé'})
+
+    //Est-ce qu'on a choisi une bonne couleur ?
+    if(!datas.color || (datas.color !== 'white' && datas.color !== 'black')) return res.status(400).json({message : 'Couleur non valide'})
+
+    const colorAdd = datas.color
+    const newOppening = new ColorOuverture({
+            name: datas.name
+        ,commentaire: datas.commentaire
+        ,img: datas.img
+    })
+    myUser.ouvertures[colorAdd].push(newOppening)
+    myUser.save()
+
+    return res.status(201).json({message : 'Ouverture créée'})
 })
 
 /**
@@ -75,26 +72,25 @@ router.put('/', async (req,res) => {
     //})
     
     const myUser = await User.findOne({ _id: datas.iduser })
-    if(myUser !== null){
-        if(datas.color && (datas.color === 'white' || datas.color === 'black')){
-            const foundO = myUser.ouvertures[datas.color].find(el => el._id == datas.idOuverture)
 
-            if(foundO){
-                foundO.name = datas.name
-                foundO.commentaire = datas.commentaire
-                foundO.img = datas.img
-                myUser.save()
-            }else{
-                res.status(400).json({message : 'Cette ouverture n\'existe pas'})
-            }
+    //Est-ce que notre utilisateur existe ?
+    if(myUser === null) return res.status(401).json({message : 'Utilisateur non trouvé'})
 
-            res.status(201).json({message : 'Ouverture modifiée'})
-        }else{
-            res.status(400).json({message : 'Couleur non valide'})
-        }
-    }else{
-        res.status(400).json({message : 'Utilisateur non trouvé'})
-    }   
+    //Est-ce qu'on a choisi une bonne couleur ?
+    if(!datas.color || (datas.color !== 'white' && datas.color !== 'black')) return res.status(400).json({message : 'Couleur non valide'})
+
+    //On cherche notre ouverture
+    const foundO = myUser.ouvertures[datas.color].find(el => el._id == datas.idOuverture)
+    if(!foundO) return res.status(400).json({message : 'Cette ouverture n\'existe pas'})
+
+    //On update notre objet
+    foundO.name = datas.name
+    foundO.commentaire = datas.commentaire
+    foundO.img = datas.img
+    myUser.save()
+
+    return res.status(200).json({message : 'Ouverture modifiée'})
+     
 })
 
 module.exports = router;

@@ -24,37 +24,33 @@ router.post('/', async (req,res) => {
     const datas = req.body;
     const myUser = await User.findOne({ _id: datas.iduser })
 
-    if(myUser !== null){
-        //type = ouverture ou finale
-        if(myUser?.[datas.type]?.[datas.color]){
-            const foundO = myUser[datas.type][datas.color].find(el => el._id == datas.idOuverture)
-            if(foundO){
+    //Est-ce que notre utilisateur existe ?
+    if(myUser === null) return res.status(401).json({message : 'Utilisateur non trouvé'})
+    
+    //Si les données envoyées sont correctes (type : ouverture ou finale)
+    if(! myUser?.[datas.type]?.[datas.color]) return res.status(400).json({message : 'Type ou couleur inconnue'})
+    
+    //On cherche notre ouverture
+    const foundO = myUser[datas.type][datas.color].find(el => el._id == datas.idOuverture)
+    if(!foundO) return res.status(400).json({message : 'Cette ouverture n\'existe pas'})
 
-                const newVariante = new Variante({
-                    name:datas.name
-                    ,commentaire:datas.commentaire
-                    ,id:datas.idEmbed
-                    ,origine: datas.origine
-                })
+    const newVariante = new Variante({
+        name:datas.name
+        ,commentaire:datas.commentaire
+        ,id:datas.idEmbed
+        ,origine: datas.origine
+    })
 
-                 //Si c'est la premiere variante, on initialise
-                if(foundO.variantes === undefined){
-                    foundO.variantes = [newVariante]
-                }else{
-                    foundO.variantes.push(newVariante)
-                }
-
-                myUser.save()
-                res.status(200).json({message : 'Variante créée'})
-            }else{
-                res.status(400).json({message : 'Cette ouverture n\'existe pas'})
-            }
-        }else{
-            res.status(400).json({message : 'Type ou couleur inconnue'})
-        }
+     //Si c'est la premiere variante, on initialise
+    if(foundO.variantes === undefined){
+        foundO.variantes = [newVariante]
     }else{
-        res.status(400).json({message : 'Utilisateur non trouvé'})
+        foundO.variantes.push(newVariante)
     }
+
+    myUser.save()
+    return res.status(201).json({message : 'Variante créée'})
+    
 })
 
 /**
@@ -73,28 +69,28 @@ router.put('/', async (req,res) => {
     const datas = req.body;
     const myUser = await User.findOne({ _id: datas.iduser })
 
-    if(myUser !== null){
-        if(myUser?.[datas.type]?.[datas.color]){
-            const foundO = myUser[datas.type][datas.color].find(el => el._id == datas.idOuverture)
-            if(foundO){
-                const foundV = foundO.variantes.find(el => el._id == datas.idVariante)
-                if(foundV){
-                    foundV.name = datas.name
-                    foundV.commentaire = datas.commentaire
-                    foundV.id = datas.idEmbed
-                    foundV.origine = datas.origine
-                    myUser.save()
-                    res.status(200).json({message : 'Variante modifiée'})
-                }
-            }else{
-                res.status(400).json({message : 'Cette ouverture n\'existe pas'})
-            }
-        }else{
-            res.status(400).json({message : 'Type ou couleur inconnue'})
-        }
-    }else{
-        res.status(400).json({message : 'Utilisateur non trouvé'})
-    }
+    //Est-ce que notre utilisateur existe ?
+    if(myUser === null) return res.status(401).json({message : 'Utilisateur non trouvé'})
+
+    //Si les données envoyées sont correctes (type : ouverture ou finale)
+    if(! myUser?.[datas.type]?.[datas.color]) return res.status(400).json({message : 'Type ou couleur inconnue'})
+    
+    //On cherche notre ouverture
+    const foundO = myUser[datas.type][datas.color].find(el => el._id == datas.idOuverture)
+    if(!foundO) return res.status(400).json({message : 'Cette ouverture n\'existe pas'})
+    
+    //On cherche la variante à changer
+    const foundV = foundO.variantes.find(el => el._id == datas.idVariante)
+    if(!foundV) return res.status(400).json({message : 'Cette variante n\'existe pas'})
+
+    //On met à jour l'objet
+    foundV.name = datas.name
+    foundV.commentaire = datas.commentaire
+    foundV.id = datas.idEmbed
+    foundV.origine = datas.origine
+    myUser.save()
+    return res.status(200).json({message : 'Variante modifiée'})
+
 })
 
 //A faire : User jwt
