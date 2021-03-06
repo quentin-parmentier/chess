@@ -33,10 +33,11 @@ router.post('/', async (req, res) => {
 
     const colorAdd = datas.color
     const newOppening = new ColorOuverture({
-            name: datas.name
+         name: datas.name
         ,commentaire: datas.commentaire
         ,img: datas.img
     })
+    if(! myUser.ouvertures) myUser.ouvertures = new Ouverture({})
     myUser.ouvertures[colorAdd].push(newOppening)
     myUser.save()
 

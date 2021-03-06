@@ -23,15 +23,15 @@ router.post('/', async (req,res) => {
     connect()
     const datas = req.body;
     const myUser = await User.findOne({ _id: datas.iduser })
-
+    
     //Est-ce que notre utilisateur existe ?
     if(myUser === null) return res.status(401).json({message : 'Utilisateur non trouvé'})
     
     //Si les données envoyées sont correctes (type : ouverture ou finale)
-    if(! myUser?.[datas.type]?.[datas.color]) return res.status(400).json({message : 'Type ou couleur inconnue'})
+    if(! myUser?.ouvertures?.[datas.color]) return res.status(400).json({message : 'Type ou couleur inconnue'})
     
     //On cherche notre ouverture
-    const foundO = myUser[datas.type][datas.color].find(el => el._id == datas.idOuverture)
+    const foundO = myUser.ouvertures[datas.color].find(el => el._id == datas.idOuverture)
     if(!foundO) return res.status(400).json({message : 'Cette ouverture n\'existe pas'})
 
     const newVariante = new Variante({
@@ -73,10 +73,10 @@ router.put('/', async (req,res) => {
     if(myUser === null) return res.status(401).json({message : 'Utilisateur non trouvé'})
 
     //Si les données envoyées sont correctes (type : ouverture ou finale)
-    if(! myUser?.[datas.type]?.[datas.color]) return res.status(400).json({message : 'Type ou couleur inconnue'})
+    if(! myUser?.ouvertures?.[datas.color]) return res.status(400).json({message : 'Type ou couleur inconnue'})
     
     //On cherche notre ouverture
-    const foundO = myUser[datas.type][datas.color].find(el => el._id == datas.idOuverture)
+    const foundO = myUser.ouvertures[datas.color].find(el => el._id == datas.idOuverture)
     if(!foundO) return res.status(400).json({message : 'Cette ouverture n\'existe pas'})
     
     //On cherche la variante à changer
@@ -92,7 +92,5 @@ router.put('/', async (req,res) => {
     return res.status(200).json({message : 'Variante modifiée'})
 
 })
-
-//A faire : User jwt
 
 module.exports = router;

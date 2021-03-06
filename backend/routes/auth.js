@@ -93,7 +93,7 @@ router.post('/refresh', async (req,res) => {
     jwt.verify(refreshToken.token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.status(403).json({message : "Le jeton est corrompu"})
         //S'il est valide on en recréer un et on le réenvoi
-        const accessToken = createToken({ name: user.iduser })
+        const accessToken = createToken({ iduser: user.iduser })
         res.status(200).json({ accessToken: accessToken })
     })
 })
@@ -134,7 +134,7 @@ router.delete('/totallogout', async (req, res) => {
 
 //Fonction permettant de créer un jwt
 function createToken(obj){
-    return jwt.sign(obj, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
+    return jwt.sign(obj, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15d' })
 }
 
 module.exports = router

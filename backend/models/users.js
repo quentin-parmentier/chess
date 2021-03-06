@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const OuvertureSchema = require('./ouverture.js')
+const FinaleSchema = require('./finales.js')
 
 const UserSchema = mongoose.Schema({
   pseudo: {
@@ -11,6 +12,9 @@ const UserSchema = mongoose.Schema({
   },
   ouvertures : {
     type: OuvertureSchema, required: false
+  },
+  finales : {
+    type: FinaleSchema, required: false
   }
 });
 
