@@ -29,12 +29,13 @@ export default {
 		if(this.$route.params.type == 'ouvertures'){
 			this.etude = inject('ouvertures')[this.$route.params.type][this.$route.params.color][this.$route.params.id]
 		}else{
-			this.etude = inject('finales')[this.$route.params.type][this.$route.params.id]
+			this.etude['variantes'] = inject('finales')[this.$route.params.type][this.$route.params.id]
+			this.etude['name'] = `Les finales de ${this.$route.params.id}s`
 		}
 	},
 	data () {
 		return {
-			etude : null
+			etude : []
 		}
 	},
 }

@@ -1,47 +1,44 @@
 {
     "pion":{
-        "name":"Finales de pions",
-        "variantes":{
-            "v6":{
-                "id":7669388,
-                "name":"Position nulle R-p-R",
-                "commentaire":"Sans erreur, c'est nulle"
-            }
-            ,"v7":{
-                "id":7669444,
-                "name":"Position R-p-R possiblement gagnante",
-                "commentaire":"Laisser une case entre son pion et le roi permet de gagner !"
-            }
-            ,"v8":{
-                "id":7669884,
-                "name":"Triangulation",
-                "commentaire":"Donner le trait pour pouvoir avoir accès à une case"
-            }
-            ,"v1":{
-                "id":7669096,
-                "name":"Pion passé lié vs Pion éloigné",
-                "commentaire":"On reste dans le carré du pion <br> On aide notre pion à aller à dame avec le roi"
-            }
-            ,"v2":{
-                "id":7669194,
-                "name":"Finale clean avec un pion de plus",
-                "commentaire":"Un plan en 4 étapes"
-            }
-            ,"v3":{
-                "id":7669210,
-                "name":"Finale avec Zugzang",
-                "commentaire":"On pousse le pion jusqu'à faire comme s'il y allait avoir pat <br> mais les noirs ont encore un coup de pion et perdent"
-            }
-            ,"v4":{
-                "id":7669246,
-                "name":"Une mauvaise structure : 1 vs 3 pions",
-                "commentaire":"Pourquoi la structure compte"
-            }
-            ,"v5":{
-                "id":7669350,
-                "name":"Pions doublés",
-                "commentaire":"Pion passé éloigné <br> Blocus <br> Zugzang"
-            }
+        "v6":{
+            "id":7669388,
+            "name":"Position nulle R-p-R",
+            "commentaire":"Sans erreur, c'est nulle"
+        }
+        ,"v7":{
+            "id":7669444,
+            "name":"Position R-p-R possiblement gagnante",
+            "commentaire":"Laisser une case entre son pion et le roi permet de gagner !"
+        }
+        ,"v8":{
+            "id":7669884,
+            "name":"Triangulation",
+            "commentaire":"Donner le trait pour pouvoir avoir accès à une case"
+        }
+        ,"v1":{
+            "id":7669096,
+            "name":"Pion passé lié vs Pion éloigné",
+            "commentaire":"On reste dans le carré du pion <br> On aide notre pion à aller à dame avec le roi"
+        }
+        ,"v2":{
+            "id":7669194,
+            "name":"Finale clean avec un pion de plus",
+            "commentaire":"Un plan en 4 étapes"
+        }
+        ,"v3":{
+            "id":7669210,
+            "name":"Finale avec Zugzang",
+            "commentaire":"On pousse le pion jusqu'à faire comme s'il y allait avoir pat <br> mais les noirs ont encore un coup de pion et perdent"
+        }
+        ,"v4":{
+            "id":7669246,
+            "name":"Une mauvaise structure : 1 vs 3 pions",
+            "commentaire":"Pourquoi la structure compte"
+        }
+        ,"v5":{
+            "id":7669350,
+            "name":"Pions doublés",
+            "commentaire":"Pion passé éloigné <br> Blocus <br> Zugzang"
         }
     }
 }
