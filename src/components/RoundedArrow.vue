@@ -6,6 +6,7 @@
         class="transition-colors duration-300"/>
     </svg>
 </template>
+
 <script>
     export default {
         props: {

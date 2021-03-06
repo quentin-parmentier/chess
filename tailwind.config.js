@@ -9,15 +9,25 @@ module.exports = {
       height:{
         px425:"425px"
       },
+      inset:{
+        vh80:"80vh",
+        vw85:"85vw"
+      },
+      margin:{
+        n143:"-143.5px",
+        n188:"-143.5px"
+      },
       maxWidth:{
         px800:"800px"
       },
       boxShadow: {
         "basic":"#c7c6c6 6px 7px 8px 0px",
-        "up": "#c7c6c6 12px 21px 8px 0px"
+        "up": "#c7c6c6 12px 21px 8px 0px",
+        'innerinput': 'inset 0 0px 0px 1px rgb(209, 213, 219)',
+        'innerinput-focus': 'inset 0 1px 4px 0px rgb(178 0 0)'
       },
       animation: {
-        "colorchange" : "fill ease 500ms"
+        "pop" : "pop ease 300ms"
       },
       backgroundImage: {
         'arrow_back': "url('./assets/img/arrow_back.svg')",
@@ -37,6 +47,12 @@ module.exports = {
         'icon-left': '7px center',
         'icon-right':"right center",
         'center' : "center center"
+      },
+      keyframes: {
+        pop: {
+          '0%': { transform: 'scale(0)' },
+          '100%': { transform: 'scale(1)' }
+        }
       }
     },
   },

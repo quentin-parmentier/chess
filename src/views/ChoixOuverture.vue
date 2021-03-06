@@ -1,5 +1,6 @@
 <template>
-  <div class="m-auto max-w-px800">
+<div class="relative">
+  <div class="m-auto max-w-px800 min-h-fullvh">
     <div class="flex">
       <div class=" self-center w-24 ">
         <router-link :to="{ name: 'Color'}"> 
@@ -18,34 +19,45 @@
     <div class=" mb-3" v-for="(ouverture,index) in oppenings" :key="index" > 
        <ouverture :ouverture="ouverture" :color="color" :index="index" />
     </div>
+    <rounded-add @click="() => this.isAdding = true"/> 
+    
   </div>
+  <add-ouverture v-if="isAdding" @enregistrer="() => newOppening()" :color="color" />
+</div>
 </template>
 
 <script>
-import { inject } from 'vue'
 import Ouverture from '../components/Ouverture.vue'
 import BaseButton from '../components/BaseButton.vue'
 import BaseIconButton from '../components/BaseIconButton.vue'
+import RoundedAdd from '../components/RoundedAdd.vue'
+import AddOuverture from '../components/AddOuverture.vue'
 export default {
-  props: {
-  },
-    components: { Ouverture, BaseButton, BaseIconButton },
+    methods: {
+      newOppening(){
+        this.oppenings = this?.ouvertures?.['ouvertures']?.[this.color]
+        this.isAdding = false
+      }
+    },
+
+    components: { Ouverture, BaseButton, BaseIconButton, RoundedAdd, AddOuverture },
     created () {
-      this.ouvertures = inject('ouvertures')['ouvertures']
       this.color = this.$route.params.color
-      this.oppenings = this.ouvertures[this.color]
+      this.oppenings = this?.ouvertures?.['ouvertures']?.[this.color]
     },
     data () {
         return {
             oppenings : [],
             color: "",
-            ouvertures:[]
+            isHoverAdd:false,
+            isAdding:false
         }
     },
+    inject:['ouvertures'],
     watch : {
       $route(to) {
         this.color = to.params.color
-        this.oppenings = this.ouvertures[this.color]
+        this.oppenings = this?.ouvertures?.['ouvertures']?.[this.color]
       }
     }
 }

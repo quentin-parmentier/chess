@@ -15,7 +15,8 @@ export const createFinales = () => {
 }
 
 export const server = () => {
-  const state = "http://localhost:3000"
+  const serv = "http://localhost:3000"
+  const auth = "http://localhost:4000"
 
-  return {urlserv : readonly(state)}
+  return {serv : readonly(serv), auth : readonly(auth)}
 }

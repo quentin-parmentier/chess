@@ -4,12 +4,14 @@
           {{variante.name}}
         </div>
         <div class=" font-medium px-8 py-5 border-gray-500 border-solid border-2" :class="showiFrame?'border-b-0':''">
-          <span v-html="variante.commentaire" />
+          <p v-for="(ligne,index) in variante.commentaire.split('$')" :key="index">
+            {{ligne}}
+          </p>
         </div>
         <iframe v-if="showiFrame" :id="variante.id" allowtransparency="true" 
         frameborder="0" 
         class="h-px425 w-full border-gray-500 border-solid border-2 border-t-0" 
-        :src="variante.origine == undefined ? 'https://www.chess.com/emboard?id='+variante.id : 'https://lichess.org/'+variante.id"></iframe>
+        :src="variante.origine == undefined ? 'https://www.chess.com/emboard?id='+variante.id : 'https://lichess.org/study/embed/'+variante.id"></iframe>
     </div>
 </template>
 <script>

@@ -39,9 +39,9 @@ router.post('/', async (req,res) => {
     })
 
     myUser.finales[datas.piece].push(newFinale)
-    myUser.save()
-
-    return res.status(201).json({message : 'Finale créée'})
+    await myUser.save()
+    const updatedValues = await User.findOne({ _id: datas.iduser })
+    return res.status(201).json({message : 'Finale créée', finales: updatedValues.finales})
     
 })
 

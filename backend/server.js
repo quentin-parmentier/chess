@@ -25,6 +25,7 @@ var authenticateToken = function (req, res, next) {
       if (err) return res.status(403).json({message:err})
       const currentId = user.iduser
       if(!currentId.match(/^[0-9a-fA-F]{24}$/)) return res.status(401).json({message : "Identifiant inconnu"})
+      req.body = req.body.data ?? {}
       req.body.iduser = currentId
       next()
     })

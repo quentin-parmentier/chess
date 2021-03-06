@@ -24,9 +24,6 @@
 import RoundedArrow from './RoundedArrow.vue'
 export default {
   components: { RoundedArrow },
-  created () {
-    console.log(this.svg)
-  },
   data () {
     return {
       isHover: false
@@ -44,7 +41,7 @@ export default {
       required: true
     },
     index: { 
-      type: String,
+      type: [String,Number],
       default: null,
       required: true
     },

@@ -5,6 +5,7 @@
         transform transition duration-300 hover:-translate-y-0.5 hover:shadow-basic"
         :class="[(prefixIcon !== '' ? 'bg-no-repeat pl-9 bg-icon-left bg-'+prefixIcon : ''),
                 color]"
+        :type="type"
         >{{label}}</button>
     </div>
 </template>
@@ -24,6 +25,11 @@ export default {
     color: { 
       type: String,
       default: ' bg-blue-700 hover:bg-blue-800 text-white',
+      required: false
+    },
+    type: { 
+      type: String,
+      default: '',
       required: false
     },
   },

@@ -1,5 +1,6 @@
 <template lang="">
-	<div class="max-w-px800 m-auto">
+<div class="relative">
+	<div class="max-w-px800 m-auto min-h-fullvh">
 		<div class="flex">
 			<div class=" self-center w-24 ">
 				<base-button label="Retour" prefixIcon="arrow_back" @click="$router.go(-1)" /> 
@@ -13,30 +14,57 @@
 		<div v-for="(variante,index) in etude['variantes']" :key="index" class="mb-4" > 
 			<variante :variante="variante" />
 		</div>
+
+		<rounded-add @click="() => this.isAdding = true"/>
 	</div>
+	<add-variante :piece="this.id" :color="this.color" :id="etude._id" v-if="isAdding" :type="this.type" @enregistrer="() => newVariante()" />
+</div>
+	
 	
 </template>
 
 <script>
 	import Variante from '../components/Variante.vue'
 	import BaseButton from '../components/BaseButton.vue'
-	import { inject } from 'vue'
+	import RoundedAdd from '../components/RoundedAdd.vue'
+	import AddVariante from '../components/AddVariante.vue'
 export default {
-  props: {
-  },
-	components: { Variante,BaseButton },
-	created () {
-		if(this.$route.params.type == 'ouvertures'){
-			this.etude = inject('ouvertures')[this.$route.params.type][this.$route.params.color][this.$route.params.id]
+	methods: {
+      newVariante(){
+        if(this.type == 'ouvertures'){
+			this.etude = this.ouvertures?.[this.type]?.[this.color]?.[this.id]
 		}else{
-			this.etude['variantes'] = inject('finales')[this.$route.params.type][this.$route.params.id]
-			this.etude['name'] = `Les finales de ${this.$route.params.id}s`
+			this.etude['variantes'] =this.finales?.[this.type]?.[this.id]
+			this.etude['name'] = `Les finales de ${this.id}s`
 		}
+		
+        this.isAdding = false
+      }
+    },
+	components: { Variante,BaseButton,RoundedAdd, AddVariante },
+	created () {
+		this.type = this.$route.params.type
+		this.color = this.$route.params.color
+		this.id = this.$route.params.id
+		
+		if(this.type == 'ouvertures'){
+			this.etude = this.ouvertures?.[this.type]?.[this.color]?.[this.id]
+		}else{
+			this.etude['variantes'] = this.finales?.[this.type]?.[this.id]
+			this.etude['name'] = `Les finales de ${this.id}s`
+		}
+		console.log(this.etude)
+		
 	},
 	data () {
 		return {
-			etude : []
+			etude : [],
+			isAdding : false,
+			type: "",
+			color:"",
+			id:""
 		}
 	},
+	inject:['ouvertures','finales']
 }
 </script>

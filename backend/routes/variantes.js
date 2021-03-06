@@ -11,7 +11,6 @@ const connect = require('../globals/connection.js')
 
 /**
  * Ajoute une variante à une ouverture
- * @param type
  * @param color
  * @param idOuverture
  * @param name
@@ -29,7 +28,8 @@ router.post('/', async (req,res) => {
     
     //Si les données envoyées sont correctes (type : ouverture ou finale)
     if(! myUser?.ouvertures?.[datas.color]) return res.status(400).json({message : 'Type ou couleur inconnue'})
-    
+    if(!datas.name || datas.name == "") return res.status(400).json({message : 'Le nom de la variante est obligatoire'})
+
     //On cherche notre ouverture
     const foundO = myUser.ouvertures[datas.color].find(el => el._id == datas.idOuverture)
     if(!foundO) return res.status(400).json({message : 'Cette ouverture n\'existe pas'})
@@ -48,14 +48,14 @@ router.post('/', async (req,res) => {
         foundO.variantes.push(newVariante)
     }
 
-    myUser.save()
-    return res.status(201).json({message : 'Variante créée'})
+    await myUser.save()
+    const updatedValues = await User.findOne({ _id: datas.iduser })
+    return res.status(201).json({message : 'Variante créée', ouvertures: updatedValues.ouvertures})
     
 })
 
 /**
  * Modifie une variante
- * @param type
  * @param color
  * @param idOuverture
  * @param idVariante

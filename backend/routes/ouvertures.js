@@ -15,7 +15,6 @@ const connect = require('../globals/connection.js');
 /**
  * Ajoute une ouverture
  * @param color
- * @param idOuverture
  * @param name
  * @param commentaire
  * @param img
@@ -30,7 +29,7 @@ router.post('/', async (req, res) => {
 
     //Est-ce qu'on a choisi une bonne couleur ?
     if(!datas.color || (datas.color !== 'white' && datas.color !== 'black')) return res.status(400).json({message : 'Couleur non valide'})
-
+    if(!datas.name || datas.name == "") return res.status(400).json({message : 'Le nom de l\'ouverture est obligatoire'})
     const colorAdd = datas.color
     const newOppening = new ColorOuverture({
          name: datas.name
@@ -39,9 +38,9 @@ router.post('/', async (req, res) => {
     })
     if(! myUser.ouvertures) myUser.ouvertures = new Ouverture({})
     myUser.ouvertures[colorAdd].push(newOppening)
-    myUser.save()
-
-    return res.status(201).json({message : 'Ouverture créée'})
+    await myUser.save()
+    const updatedValues = await User.findOne({ _id: datas.iduser })
+    return res.status(201).json({message : 'Ouverture créée', ouvertures: updatedValues.ouvertures})
 })
 
 /**
