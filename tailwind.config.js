@@ -15,7 +15,8 @@ module.exports = {
       },
       margin:{
         n143:"-143.5px",
-        n188:"-143.5px"
+        n188:"-188px",
+        n214:"-214px",
       },
       maxWidth:{
         px800:"800px"
@@ -27,7 +28,8 @@ module.exports = {
         'innerinput-focus': 'inset 0 1px 4px 0px rgb(178 0 0)'
       },
       animation: {
-        "pop" : "pop ease 300ms"
+        "pop" : "pop ease 300ms",
+        "write": "write ease 1000ms"
       },
       backgroundImage: {
         'arrow_back': "url('./assets/img/arrow_back.svg')",
@@ -36,6 +38,10 @@ module.exports = {
         'finale': "url('./assets/img/finale.svg')",
         'ouverture': "url('./assets/img/ouverture.svg')",
         'pion': "url('./assets/img/pion.svg')",
+        'cross': "url('./assets/img/cross.svg')",
+        'edit': "url('./assets/img/edit.svg')",
+        'empty_o': "url('./assets/img/empty_o.svg')",
+        'empty_v': "url('./assets/img/empty_v.svg')",
       },
       backgroundSize: {
         'icon-left':"20px",
@@ -52,12 +58,20 @@ module.exports = {
         pop: {
           '0%': { transform: 'scale(0)' },
           '100%': { transform: 'scale(1)' }
+        },
+        write: {
+          '0%': { transform: 'rotate(0deg) translateX(0px)'},
+          '20%': { transform: 'rotate(10deg) translateX(2px)'},
+          '40%': { transform: 'rotate(-10deg) translateX(4px)'},
+          '60%': { transform: 'rotate(10deg) translateX(6px)'},
+          '80%': { transform: 'rotate(-10deg) translateX(8px)'},
+          '100%': {transform: 'rotate(10deg) translateX(10px)'}
         }
       }
     },
   },
   variants: {
-    extend: {},
+    extend: {animation: ['hover', 'focus']},
   },
   plugins: [],
 }

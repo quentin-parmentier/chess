@@ -1,5 +1,5 @@
 <template>
-    <div class="flex">
+    <div class="flex w-full">
       <button 
       class="w-full bg-no-repeat bg-center bg-20 h-full py-4 focus:outline-none"
       :class="'bg-'+icon" />    

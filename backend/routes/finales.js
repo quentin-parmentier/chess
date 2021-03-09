@@ -71,9 +71,10 @@ router.put('/', async (req,res) => {
     foundF.id = datas.idEmbed
     foundF.origine = datas.origine
 
-    myUser.save()
+    await myUser.save()
+    const updatedValues = await User.findOne({ _id: datas.iduser })
 
-    return res.status(201).json({message : 'Finale modifiée'})
+    return res.status(201).json({message : 'Finale modifiée', finales: updatedValues.finales})
     
 })
 

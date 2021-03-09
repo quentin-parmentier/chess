@@ -88,8 +88,9 @@ router.put('/', async (req,res) => {
     foundV.commentaire = datas.commentaire
     foundV.id = datas.idEmbed
     foundV.origine = datas.origine
-    myUser.save()
-    return res.status(200).json({message : 'Variante modifiée'})
+    await myUser.save()
+    const updatedValues = await User.findOne({ _id: datas.iduser })
+    return res.status(200).json({message : 'Variante modifiée',ouvertures: updatedValues.ouvertures})
 
 })
 

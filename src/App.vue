@@ -13,6 +13,7 @@ export default {
     const {storeOuvertures,setOuvertures} = createOuvertures()
     provide('ouvertures',storeOuvertures)
     provide('setOuvertures',setOuvertures)
+    
     const {storeFinales,setFinales} = createFinales()
     provide('finales',storeFinales)
     provide('setFinales',setFinales)

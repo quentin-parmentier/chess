@@ -1,32 +1,103 @@
 <template lang="">
-    <router-link :to="{ name: 'Variantes', params: {id:index, color:color, type:'ouvertures'}}" @mouseover="() => this.isHover = true" @mouseout="() => this.isHover = false">
-      <div class="h-28 flex rounded-md border-2 border-solid border-gray-400 shadow-basic">
+    <router-link :to="{ name: 'Variantes', params: {id:index, color:color, type:'ouvertures'}}">
+      <div class="flex rounded-md border-2 border-solid border-gray-400 shadow-basic">
+        <div class="flex-1" @mouseover="() => this.isHover = true" @mouseout="() => this.isHover = false">
+          <div class="h-28 flex ">
 
-        <div class=" h-full w-28">
-          <img :src="ouverture.img" alt="" class="h-full object-cover">
-        </div>
-        <div class=" flex-1 pl-12 self-center">
-          <div class=" font-bold text-xl text-gray-800">
-            {{ouverture.name}}
+            <div class=" h-full w-28">
+              <img :src="ouverture.img" ref="img" :onerror="() => changeImg()" alt="" class="h-full object-cover">
+            </div>
+            <div class=" flex-1 pl-12 self-center break-all">
+              <div class=" font-bold text-xl text-gray-800">
+                {{ouverture.name}}
+              </div>
+              <div class=" font-semibold text-sm text-gray-400 pl-4 mt-1 break-all">
+                {{ouverture.commentaire}}
+              </div>
+            </div>
+            <div class="w-16">
+              <rounded-arrow :hover="isHover"> </rounded-arrow>
+            </div>
           </div>
-          <div class=" font-semibold text-sm text-gray-400 pl-4 mt-1">
-            {{ouverture.commentaire}}
-          </div>
         </div>
-        <div class=" w-16">
-          <rounded-arrow :hover="isHover"> </rounded-arrow>
+        
+
+        <div class=" w-12 flex flex-col py-3 justify-around" @click="(e) => e.preventDefault()">
+          <base-icon-button 
+            @click="(e) => deleteO(e)"
+            icon="cross"
+            class="hover:rotate-90 transition duration-300 transform" 
+          />
+          <base-icon-button 
+            @click="(e) => editO(e)"
+            icon="edit"
+            class="hover:animate-write" 
+          />
         </div>
       </div>
     </router-link>
+    <div v-if="validationDelete">
+      <div class="bg-gray-500 opacity-40 w-full h-full z-40 absolute top-0 left-0" @click="() => validationDelete = false"></div>
+      <div class="fixed space-y-2 font-bold top-1/2 left-1/2 mt-n188 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop">
+        <h3 class="text-center">Confirmez-vous la suppression de l'ouverture :</h3>
+        <p class="text-center font-medium">{{ouverture.name}}</p>
+         <div class="flex justify-evenly">
+            <base-button label="Supprimer" class=" text-center p-3 " color="border-red-400 border-solid border-2 text-red-400 hover:bg-red-400 hover:text-white" @click="() => sendDelete()" />
+            <base-button label="Annuler" class=" text-center p-3" @click="() => validationDelete = false" />
+          </div>
+      </div>
+    </div>
+    
 </template>
 <script>
 
 import RoundedArrow from './RoundedArrow.vue'
+import BaseIconButton from '../components/BaseIconButton.vue'
+import BaseButton from '../components/BaseButton.vue'
+const axios = require('axios');
+
 export default {
-  components: { RoundedArrow },
+  created () {
+    this.token = localStorage.getItem('token')
+  },
+  methods: {
+    editO(e){
+      e.preventDefault();
+      this.$emit('edit',this.ouverture)
+    },
+    deleteO(e){
+      e.preventDefault();
+      this.validationDelete = true
+    },
+    sendDelete(){
+      axios.delete(`${this.serv}/ouvertures`,
+        {
+          headers: {'Authorization': 'Bearer ' + this.token},
+          data: {
+            color: this.color,
+            idOuverture: this.ouverture._id
+          }
+        }
+      )
+      .then( (response) => {
+          this.setOuvertures(response.data.ouvertures)
+          this.validationDelete = false
+          this.$emit('enregistrer')
+      })
+      .catch((error) => {
+          console.log(error);
+      })
+    },
+    changeImg(){
+      this.$refs.img.src = 'https://via.placeholder.com/150?text=No img'
+    }
+  },
+  components: { RoundedArrow,BaseIconButton,BaseButton },
   data () {
     return {
-      isHover: false
+      isHover: false,
+      validationDelete: false,
+      token: ""
     }
   },
   props: {
@@ -47,6 +118,8 @@ export default {
     },
       
   },
+  emits:['edit','enregistrer'],
+  inject:['serv','setOuvertures']
     
 }
 </script>

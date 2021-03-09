@@ -39,8 +39,8 @@ router.post('/', async (req, res) => {
     if(! myUser.ouvertures) myUser.ouvertures = new Ouverture({})
     myUser.ouvertures[colorAdd].push(newOppening)
     await myUser.save()
-    const updatedValues = await User.findOne({ _id: datas.iduser })
-    return res.status(201).json({message : 'Ouverture créée', ouvertures: updatedValues.ouvertures})
+    
+    return res.status(201).json({message : 'Ouverture créée', ouvertures: myUser.ouvertures})
 })
 
 /**
@@ -87,10 +87,35 @@ router.put('/', async (req,res) => {
     foundO.name = datas.name
     foundO.commentaire = datas.commentaire
     foundO.img = datas.img
-    myUser.save()
+    await myUser.save()
 
-    return res.status(200).json({message : 'Ouverture modifiée'})
+    return res.status(200).json({message : 'Ouverture modifiée', ouvertures: myUser.ouvertures})
      
+})
+
+/**
+ * Modifie une ouverture
+ * @param color
+ * @param idOuverture
+*/
+router.delete('/', async (req,res) => {
+    const datas = req.body
+    connect()
+
+    const myUser = await User.findOne({ _id: datas.iduser })
+
+    //Est-ce que notre utilisateur existe ?
+    if(myUser === null) return res.status(401).json({message : 'Utilisateur non trouvé'})
+
+    //Est-ce qu'on a choisi une bonne couleur ?
+    if(!datas.color || (datas.color !== 'white' && datas.color !== 'black')) return res.status(400).json({message : 'Couleur non valide'})
+
+    //On cherche notre ouverture
+    myUser.ouvertures[datas.color] = myUser.ouvertures[datas.color].filter(el => el._id != datas.idOuverture)
+    await myUser.save()
+
+    return res.status(200).json({message : 'Ouverture supprimée', ouvertures: myUser.ouvertures})
+
 })
 
 module.exports = router;
