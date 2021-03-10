@@ -17,7 +17,7 @@
 		<!-- Variantes list  -->
 		<div v-if="etude?.['variantes']?.length > 0">
 			<div v-for="(variante,index) in etude['variantes']" :key="index" class="pb-4" > 
-				<variante :variante="variante" @edit="(varianteE) => startEdit(varianteE)" />
+				<variante :datas="{type:type,color:color,idOuverture:etude._id,piece:id}" :variante="variante" @enregistrer="() => newVariante()" @edit="(varianteE) => startEdit(varianteE)" />
 			</div>
 		</div>
 		<!-- SVG CTA create -->
@@ -63,7 +63,6 @@ export default {
 			}
 		},
 		startEdit(varianteE){
-			console.log(varianteE)
 			this.editVariante = varianteE
 			this.isEditing = true
 		}
@@ -75,7 +74,7 @@ export default {
 		this.id = this.$route.params.id
 		
 		if(this.type == 'ouvertures'){
-			
+			//Etude = finales ou ouverture
 			this.etude = this.ouvertures?.[this.type]?.[this.color]?.[this.id]
 			this.etude ?? this.$router.push({name:'Ouvertures',params:{color:this.color}})
 			this.etude = this?.etude ?? []

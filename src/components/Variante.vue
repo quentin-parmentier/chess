@@ -28,11 +28,27 @@
       class="h-px425 w-full border-gray-500 border-solid border-2 border-t-0" 
       :src="variante.origine == undefined ? 'https://www.chess.com/emboard?id='+variante.id : 'https://lichess.org/study/embed/'+variante.id"></iframe>
   </div>
+  <div v-if="validationDelete">
+    <div class="bg-gray-500 opacity-40 w-full h-full z-40 absolute top-0 left-0" @click="() => validationDelete = false"></div>
+    <div class="fixed space-y-2 font-bold top-1/2 left-1/2 mt-n188 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop">
+      <h3 class="text-center">Confirmez-vous la suppression de la variante :</h3>
+      <p class="text-center font-medium">{{variante.name}}</p>
+        <div class="flex justify-evenly">
+          <base-button label="Supprimer" class=" text-center p-3 " color="border-red-400 border-solid border-2 text-red-400 hover:bg-red-400 hover:text-white" @click="() => this.datas.type == 'ouvertures' ? sendDeleteV() : sendDeleteF()" />
+          <base-button label="Annuler" class=" text-center p-3" @click="() => validationDelete = false" />
+        </div>
+    </div>
+  </div>
 </template>
 <script>
 
 import BaseIconButton from '../components/BaseIconButton.vue'
+import BaseButton from '../components/BaseButton.vue'
+const axios = require('axios');
 export default {
+  created () {
+    this.token = localStorage.getItem('token')
+  },
   methods: {
     editV(e){
       e.preventDefault();
@@ -44,10 +60,51 @@ export default {
       e.stopPropagation();
       this.validationDelete = true
     },
+    sendDeleteV(){
+      axios.delete(`${this.serv}/variantes`,
+        {
+          headers: {'Authorization': 'Bearer ' + this.token},
+          data: {
+            color: this?.datas.color,
+            idOuverture: this?.datas.idOuverture,
+            idVariante: this.variante._id
+          }
+        }
+      )
+      .then( (response) => {
+          this.setOuvertures(response.data.ouvertures)
+          this.validationDelete = false
+          this.$emit('enregistrer')
+      })
+      .catch((error) => {
+          console.log(error);
+      })
+    },
+    sendDeleteF(){
+      axios.delete(`${this.serv}/finales`,
+        {
+          headers: {'Authorization': 'Bearer ' + this.token},
+          data: {
+            piece: this?.datas.piece,
+            idVariante: this.variante._id
+          }
+        }
+      )
+      .then( (response) => {
+        this.setOuvertures(response.data.ouvertures)
+        this.validationDelete = false
+        this.$emit('enregistrer')
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
   },
   data () {
     return {
-      showiFrame : false
+      showiFrame : false,
+      validationDelete: false,
+      token: null
     }
   },
   props: {
@@ -56,10 +113,16 @@ export default {
       default: null,
       required: true
     },
+    datas :{ 
+      type: Object,
+      default: null,
+      required: true
+    }
     
   },
-  components : {BaseIconButton},
-  emits: ['edit']
+  components : {BaseIconButton,BaseButton},
+  emits: ['edit','enregistrer'],
+  inject: ['serv','setOuvertures']
     
 }
 </script>

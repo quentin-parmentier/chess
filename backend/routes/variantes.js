@@ -94,4 +94,35 @@ router.put('/', async (req,res) => {
 
 })
 
+/**
+ * supprimer une variante
+ * @param color
+ * @param idOuverture
+ * @param idVariante
+ */
+router.delete('/', async (req,res) => {
+    connect()
+    const datas = req.body;
+    
+    const myUser = await User.findOne({ _id: datas.iduser })
+
+    //Est-ce que notre utilisateur existe ?
+    if(myUser === null) return res.status(401).json({message : 'Utilisateur non trouvé'})
+
+    //Si les données envoyées sont correctes (type : ouverture ou finale)
+    if(! myUser?.ouvertures?.[datas.color]) return res.status(400).json({message : 'Type ou couleur inconnue'})
+    
+    //On cherche notre ouverture
+    let foundO = myUser.ouvertures[datas.color].findIndex(el => el._id == datas.idOuverture)
+    if(foundO === -1) return res.status(400).json({message : 'Cette ouverture n\'existe pas'})
+
+    //On cherche la variante à changer
+    myUser.ouvertures[datas.color][foundO].variantes = myUser.ouvertures[datas.color][foundO].variantes.filter((variante) => variante._id != datas.idVariante)
+    
+    await myUser.save()
+    const updatedValues = await User.findOne({ _id: datas.iduser })
+    return res.status(200).json({message : 'Variante supprimée',ouvertures: updatedValues.ouvertures})
+
+})
+
 module.exports = router;

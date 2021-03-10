@@ -22,22 +22,26 @@ export default {
     const auth = server().auth
     provide('serv',serv)
     provide('auth',auth)
+    
+    //A enlever
     localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzZXIiOiI2MDQxNWE3ZmYwN2Y1OTUyOTAxMmFlMTAiLCJpYXQiOjE2MTQ5OTE4NzcsImV4cCI6MTYxNjI4Nzg3N30.fvvtm89ktPD2OcunqkgkYkhVTjkBRM_1TInujn-5Lfc');
-    axios.get(`${serv}/users`
-    , {headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}}
-    )
-    .then((response) => {
-
-      const ouvertures = response.data.ouvertures ?? {white:{},black:{}}
-      setOuvertures(ouvertures)
-      const finales = response.data.finales ?? ({pion:{},tour:{}})
-      setFinales(finales)
-
-    })
-    .catch( (error) => {
-      // handle error
-      console.log(error);
-    })
+    
+    //Si on est connecté, on va chercher nos ouvertures et nos finales, sinon on le fera à la connexion
+    if(localStorage.getItem('token')){
+      axios.get(`${serv}/users`
+      ,{headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}}
+      )
+      .then((response) => {
+        const ouvertures = response.data.ouvertures ?? {white:{},black:{}}
+        setOuvertures(ouvertures)
+        const finales = response.data.finales ?? ({pion:{},tour:{}})
+        setFinales(finales)
+      })
+      .catch( (error) => {
+        // handle error
+        console.log(error);
+      })
+    }
   }
 }
 </script>
