@@ -1,20 +1,20 @@
 <template>
     
-    <div class="flex flex-col  h-screen">
+    <div class="flex flex-col  min-h-screen">
       <div class="flex">
         <div class=" self-center w-1/4 text-center ">
           <router-link :to="{ name: 'Themes'}"> 
             <base-button label="Retour" prefixIcon="arrow_back" /> 
           </router-link>
         </div>
-        <div class="p-8 text-center font-bold text-3xl self-center flex-1"> Les ouvertures </div>
+        <h1 class="h1 flex-1"> Les ouvertures </h1>
         <div class="w-1/4"></div>
       </div>
-      <div class="flex flex-1 max-w-screen-lg w-full m-auto">
-      <router-link class="flex-1 pb-12 px-4" :to="{ name: 'Ouvertures', params: {color:'white'}}">
+      <div class="flexcenter max-w-screen-lg w-full m-auto">
+      <router-link class="bisquare" :to="{ name: 'Ouvertures', params: {color:'white'}}">
         <square-image img="whitepiece" />
       </router-link> 
-      <router-link class="flex-1 pb-12 px-4" :to="{ name: 'Ouvertures', params: {color:'black'}}">
+      <router-link class="bisquare" :to="{ name: 'Ouvertures', params: {color:'black'}}">
         <square-image img="blackpiece" />
       </router-link>
       </div>

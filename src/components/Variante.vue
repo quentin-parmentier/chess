@@ -1,10 +1,10 @@
 <template lang="">
-  <div class=" cursor-pointer" v-on:click="() => showiFrame = !showiFrame">
+  <div class="cursor-pointer shadow-basic rounded-md" v-on:click="() => showiFrame = !showiFrame">
     <div class="flex">
-      <div class="flex-1 text-xl font-bold text-center py-4 bg-gray-500 text-gray-100">
+      <div class=" rounded-tl-md flex-1 text-xl font-bold text-center py-4 bg-gray-500 text-gray-100">
         {{variante.name}}
       </div>
-    <div class="w-16 flex py-3 justify-around bg-gray-500" @click="(e) => e.preventDefault()">
+    <div class="rounded-tr-md w-16 flex py-3 justify-around bg-gray-500" @click="(e) => e.preventDefault()">
         <base-icon-button 
           @click="(e) => deleteV(e)"
           icon="cross"
@@ -18,19 +18,22 @@
       </div>
     </div>
       
-      <div class=" font-medium px-8 py-5 border-gray-500 border-solid border-2" :class="showiFrame?'border-b-0':''">
+      <div class=" font-medium px-8 py-5" :class="showiFrame?'border-b-0':''">
         <p v-for="(ligne,index) in variante.commentaire.split('$')" :key="index">
           {{ligne}}
         </p>
       </div>
-      <iframe v-if="showiFrame" :id="variante.id" allowtransparency="true" 
-      frameborder="0" 
-      class="h-px425 w-full border-gray-500 border-solid border-2 border-t-0" 
-      :src="variante.origine == undefined ? 'https://www.chess.com/emboard?id='+variante.id : 'https://lichess.org/study/embed/'+variante.id"></iframe>
+      <div>
+        <iframe v-if="showiFrame" :id="variante.id" allowtransparency="true" 
+        frameborder="0" 
+        class="h-px425 w-full rounded-b-md" 
+        :src="variante.origine == undefined ? 'https://www.chess.com/emboard?id='+variante.id : 'https://lichess.org/study/embed/'+variante.id"></iframe>
+      </div>
+      
   </div>
   <div v-if="validationDelete">
     <div class="bg-gray-500 opacity-40 w-full h-full z-40 absolute top-0 left-0" @click="() => validationDelete = false"></div>
-    <div class="fixed space-y-2 font-bold top-1/2 left-1/2 mt-n188 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop">
+    <div class="rounded-md fixed space-y-2 font-bold top-1/2 left-1/2 mt-n188 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop">
       <h3 class="text-center">Confirmez-vous la suppression de la variante :</h3>
       <p class="text-center font-medium">{{variante.name}}</p>
         <div class="flex justify-evenly">

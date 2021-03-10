@@ -7,7 +7,7 @@
 				<base-button label="Retour" prefixIcon="arrow_back" @click="back()" /> 
 			</div>
 			<div class=" self-center flex-1 pr-24">
-				<h2 class="text-2xl font-bold text-center m-8"> 
+				<h2 class="h2"> 
 					{{etude.name}}
 				</h2>
 			</div>
@@ -17,13 +17,18 @@
 		<!-- Variantes list  -->
 		<div v-if="etude?.['variantes']?.length > 0">
 			<div v-for="(variante,index) in etude['variantes']" :key="index" class="pb-4" > 
-				<variante :datas="{type:type,color:color,idOuverture:etude._id,piece:id}" :variante="variante" @enregistrer="() => newVariante()" @edit="(varianteE) => startEdit(varianteE)" />
+				<variante 
+					:datas="{type:type,color:color,idOuverture:etude._id,piece:id}" 
+					:variante="variante" 
+					@enregistrer="() => newVariante()" 
+					@edit="(varianteE) => startEdit(varianteE)" 
+				/>
 			</div>
 		</div>
 		<!-- SVG CTA create -->
 		<div v-else class="h-full">
 			<empty-V />
-			<p class="text-gray-400 text-xl font-bold m-10 text-center">Vous n'avez pas encore ajouté de variante</p>
+			<p class="text-gray-500 text-xl font-bold m-10 text-center">Vous n'avez pas encore ajouté de variante</p>
 		</div>
 
 	</div>

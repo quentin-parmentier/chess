@@ -2,7 +2,7 @@
     <div>
         <button 
         class=" shadow-md rounded-md font-bold p-2 focus:outline-none 
-        transform transition duration-300 hover:-translate-y-0.5 hover:shadow-basic"
+        transform transition duration-300 hover:-translate-y-0.5 hover:shadow-littleup"
         :class="[(prefixIcon !== '' ? 'bg-no-repeat pl-9 bg-icon-left bg-'+prefixIcon : ''),
                 color]"
         :type="type"

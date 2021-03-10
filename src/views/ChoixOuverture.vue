@@ -6,15 +6,15 @@
       <div class="flex">
         <div class=" self-center w-24 ">
           <router-link :to="{ name: 'Color'}"> 
-            <base-button class="px-3" label="Retour" prefixIcon="arrow_back" /> 
+            <base-button label="Retour" prefixIcon="arrow_back" /> 
           </router-link>
         </div>
-        <div class=" self-center flex-1">
-          <h1 class="text-2xl font-bold text-center p-8"> Ouvertures {{color == 'white' ? 'blanches' : 'noires'}}</h1>
+        <div class="flex-1">
+          <h2 class="h2"> Ouvertures {{color == 'white' ? 'blanches' : 'noires'}}</h2>
         </div>
         <div class=" self-center w-24 ">
           <router-link :to="{ name: 'Ouvertures', params:{color:color == 'white' ? 'black' : 'white'}}"> 
-            <base-icon-button class="transition-transform duration-300 w-12 h-12 bg-white rounded-lg transform hover:rotate-45 pr-6" :icon="color == 'white' ? 'blackpiece' : 'whitepiece'" /> 
+            <base-icon-button class="transition-transform duration-300 w-12 h-12 rounded-lg transform hover:rotate-45" :icon="color == 'white' ? 'blackpiece' : 'whitepiece'" /> 
           </router-link>
         </div>
       </div>
@@ -29,7 +29,7 @@
       <!-- SVG CTA create -->
       <div v-else class="h-full">
          <empty-O />
-         <p class="text-gray-400 text-xl font-bold m-10 text-center">Vous n'avez pas encore ajouté d'ouverture</p>
+         <p class="text-gray-500 text-xl font-bold m-10 text-center">Vous n'avez pas encore ajouté d'ouverture</p>
       </div>
 
     </div>

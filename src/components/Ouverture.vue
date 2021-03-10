@@ -1,14 +1,14 @@
 <template lang="">
     <router-link :to="{ name: 'Variantes', params: {id:index, color:color, type:'ouvertures'}}">
-      <div class="flex rounded-md border-2 border-solid border-gray-400 shadow-basic">
+      <div class="flex bg-white rounded-md shadow-basic">
         <div class="flex-1" @mouseover="() => this.isHover = true" @mouseout="() => this.isHover = false">
           <div class="h-28 flex ">
 
             <div class=" h-full w-28">
-              <img :src="ouverture.img" ref="img" :onerror="() => changeImg()" alt="" class="h-full object-cover">
+              <img :src="ouverture.img" ref="img" :onerror="() => changeImg()" alt="" class="h-full rounded-l-md object-cover">
             </div>
             <div class=" flex-1 pl-12 self-center break-all">
-              <div class=" font-bold text-xl text-gray-800">
+              <div class=" font-bold text-xl">
                 {{ouverture.name}}
               </div>
               <div class=" font-semibold text-sm text-gray-400 pl-4 mt-1 break-all">

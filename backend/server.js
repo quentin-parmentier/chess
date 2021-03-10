@@ -14,16 +14,17 @@ const corsOptions = {
 //Middleware
 app.use(bodyParser.json())
 app.use(cors(corsOptions))
-// @ TODO
+
 //Middleware pour jwt
 var authenticateToken = function (req, res, next) {
     const authHeader = req.headers['authorization']
+    //Bearer + Token
     const token = authHeader && authHeader.split(' ')[1]
     if (token == null) return res.status(401).json({message : "Connectez-vous"})
-    console.log(token)
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
       if (err) return res.status(403).json({message:err})
       const currentId = user.iduser
+      //Pour valider l'iduser id.match(/^[0-9a-fA-F]{24}$/) car 24 caract fixé en hexa
       if(!currentId.match(/^[0-9a-fA-F]{24}$/)) return res.status(401).json({message : "Identifiant inconnu"})
       req.body = req.body.data ?? req.body
       req.body.iduser = currentId
@@ -31,7 +32,6 @@ var authenticateToken = function (req, res, next) {
     })
 }
 app.use(authenticateToken)
-//Middleware pour valider l'iduser id.match(/^[0-9a-fA-F]{24}$/)
 
 //Routes
 const usersRoutes = require('./routes/users.js')
