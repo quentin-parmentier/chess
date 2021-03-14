@@ -17,9 +17,8 @@
 		<!-- Variantes list  -->
 		<div v-if="etude?.['variantes']?.length > 0">
 			<div v-for="(variante,index) in etude['variantes']" :key="index" class="pb-4" > 
-				<variante 
-					:datas="{type:type,color:color,idOuverture:etude._id,piece:id}" 
-					:variante="variante" 
+				<component-variante 
+					:variante="objectify(variante)" 
 					@enregistrer="() => newVariante()" 
 					@edit="(varianteE) => startEdit(varianteE)" 
 				/>
@@ -35,18 +34,21 @@
 	<!-- Floating CTA Button to ADD variantes -->
 	<rounded-add @click="() => this.isAdding = true"/>
 	<!-- Composant pour ajouter/modifier des variantes -->
-	<add-variante :editV="editVariante" :piece="this.id" :color="this.color" :id="etude._id" v-if="isAdding || isEditing" :type="this.type" @enregistrer="() => newVariante()" />
+	<add-variante :editV="editVariante" v-if="isAdding || isEditing" @enregistrer="() => newVariante()" />
 </div>
 	
 	
 </template>
 
 <script>
-	import Variante from '../components/Variante.vue'
+	import ComponentVariante from '../components/Variante.vue'
 	import BaseButton from '../components/BaseButton.vue'
 	import RoundedAdd from '../components/RoundedAdd.vue'
 	import AddVariante from '../components/AddVariantes.vue'
 	import EmptyV from '../components/EmptyV.vue'
+	import Variante from '../classes/Variante'
+	import Finale from '../classes/Finale'
+
 export default {
 	methods: {
 		newVariante(){
@@ -57,6 +59,7 @@ export default {
 				this.etude['name'] = `Les finales de ${this.id}s`
 			}
 			
+			this.editVariante = this.objectify({})
 			this.isAdding = false
 			this.isEditing = false
 		},
@@ -70,9 +73,13 @@ export default {
 		startEdit(varianteE){
 			this.editVariante = varianteE
 			this.isEditing = true
+		},
+		objectify(variante){
+			if(this.type == 'ouvertures') return new Variante(variante,this.color,this.etude._id)
+			else return new Finale(variante,this.color,this.id)
 		}
     },
-	components: { Variante,BaseButton,RoundedAdd, AddVariante, EmptyV },
+	components: { ComponentVariante,BaseButton,RoundedAdd, AddVariante, EmptyV },
 	created () {
 		this.type = this.$route.params.type
 		this.color = this.$route.params.color
@@ -88,6 +95,8 @@ export default {
 			this.etude['name'] = `Les finales de ${this.id}s`
 			this.etude['variantes'] ?? this.$router.push({name:'Finales'})
 		}
+
+		this.editVariante = this.objectify({})
 		
 	},
 	data () {

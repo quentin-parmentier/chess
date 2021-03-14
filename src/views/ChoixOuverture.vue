@@ -22,8 +22,8 @@
       <!-- CENTER - List des ouvertures ou SVG pour inviter à ajouter -->
       <!-- Oppening list  -->
       <div v-if="oppenings.length > 0">
-        <div class=" pb-3" v-for="(ouverture,index) in oppenings" :key="index" > 
-          <ouverture :ouverture="ouverture" :color="color" :index="index" @edit="(ouvertureE) => startEdit(ouvertureE)" @enregistrer="() => refreshO()" />
+        <div class="pb-3" v-for="(ouverture,index) in oppenings" :key="index" > 
+          <component-ouverture :ouverture="objectify(ouverture)" :index="index" @edit="(ouvertureE) => startEdit(ouvertureE)" @enregistrer="() => refreshO()" />
         </div>
       </div>
       <!-- SVG CTA create -->
@@ -38,18 +38,20 @@
     <rounded-add @click="() => this.isAdding = true"/> 
 
     <!-- Composant pour ajouter/modifier des ouvertures -->
-    <add-ouverture :editO="editOppening" v-if="isAdding || isEditing" @enregistrer="() => refreshO()" :color="color" />
+    <add-ouverture :editO="editOppening" v-if="isAdding || isEditing" @enregistrer="() => refreshO()" />
   
   </div>
 </template>
 
 <script>
-import Ouverture from '../components/Ouverture.vue'
+import ComponentOuverture from '../components/Ouverture.vue'
 import BaseButton from '../components/BaseButton.vue'
 import BaseIconButton from '../components/BaseIconButton.vue'
 import RoundedAdd from '../components/RoundedAdd.vue'
 import EmptyO from '../components/EmptyO.vue'
 import AddOuverture from '../components/AddOuverture.vue'
+import Ouverture from '../classes/Ouverture'
+
 export default {
     methods: {
       //Méthode pour refresh la liste d'ouverture après un POST ou un PUT ou un DELETE 
@@ -57,21 +59,25 @@ export default {
         this.oppenings = this?.ouvertures?.['ouvertures']?.[this.color]
         this.isAdding = false
         this.isEditing = false
-        this.editOppening = null
+        this.editOppening = new Ouverture({},this.color)
       },
       //Affiche la fenêtre pour l'édition
       startEdit(ouvertureE){
-        this.isEditing = true; 
+        this.isEditing = true;
         this.editOppening = ouvertureE
+      },
+      objectify(ouverture){
+        return new Ouverture(ouverture,this.color)
       }
     },
 
-    components: { Ouverture, BaseButton, BaseIconButton, RoundedAdd, AddOuverture, EmptyO },
+    components: { ComponentOuverture, BaseButton, BaseIconButton, RoundedAdd, AddOuverture, EmptyO },
     created () {
       this.color = this.$route.params.color
       this.oppenings = this?.ouvertures?.['ouvertures']?.[this.color]
       this.oppenings ?? this.$router.push({name:'Color'})
-      this.oppenings= this.oppenings ?? []
+      this.oppenings = this.oppenings ?? []
+      this.editOppening = new Ouverture({},this.color)
     },
     data () {
         return {

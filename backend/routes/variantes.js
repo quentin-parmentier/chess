@@ -116,7 +116,7 @@ router.delete('/', async (req,res) => {
     let foundO = myUser.ouvertures[datas.color].findIndex(el => el._id == datas.idOuverture)
     if(foundO === -1) return res.status(400).json({message : 'Cette ouverture n\'existe pas'})
 
-    //On cherche la variante à changer
+    //On cherche la variante à filtrer
     myUser.ouvertures[datas.color][foundO].variantes = myUser.ouvertures[datas.color][foundO].variantes.filter((variante) => variante._id != datas.idVariante)
     
     await myUser.save()

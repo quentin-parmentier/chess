@@ -11,7 +11,7 @@ const VarianteSchema = mongoose.Schema({
         type: String, required: true
     },
     origine:{
-        type: String, required: false
+        type: Boolean, required: false
     }
 })
 module.exports = VarianteSchema;

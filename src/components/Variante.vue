@@ -37,7 +37,7 @@
       <h3 class="text-center">Confirmez-vous la suppression de la variante :</h3>
       <p class="text-center font-medium">{{variante.name}}</p>
         <div class="flex justify-evenly">
-          <base-button label="Supprimer" class=" text-center p-3 " color="border-red-400 border-solid border-2 text-red-400 hover:bg-red-400 hover:text-white" @click="() => this.datas.type == 'ouvertures' ? sendDeleteV() : sendDeleteF()" />
+          <base-button label="Supprimer" class=" text-center p-3 " color="border-red-400 border-solid border-2 text-red-400 hover:bg-red-400 hover:text-white" @click="() => sendDelete()" />
           <base-button label="Annuler" class=" text-center p-3" @click="() => validationDelete = false" />
         </div>
     </div>
@@ -47,10 +47,12 @@
 
 import BaseIconButton from '../components/BaseIconButton.vue'
 import BaseButton from '../components/BaseButton.vue'
-const axios = require('axios');
+import Variante from '../classes/Variante'
+import Finale from '../classes/Finale'
 export default {
   created () {
     this.token = localStorage.getItem('token')
+    console.log(this.variante)
   },
   methods: {
     editV(e){
@@ -63,44 +65,24 @@ export default {
       e.stopPropagation();
       this.validationDelete = true
     },
-    sendDeleteV(){
-      axios.delete(`${this.serv}/variantes`,
-        {
-          headers: {'Authorization': 'Bearer ' + this.token},
-          data: {
-            color: this?.datas.color,
-            idOuverture: this?.datas.idOuverture,
-            idVariante: this.variante._id
-          }
-        }
-      )
+    sendDelete(){
+      this.variante.delete(this.serv)
       .then( (response) => {
-          this.setOuvertures(response.data.ouvertures)
+        switch (true) {
+          case this.variante instanceof Variante:
+            this.setOuvertures(response.data.ouvertures)
+            break;
+          case this.variante instanceof Finale:
+            this.setFinales(response.data.finales)
+            break;
+        }
           this.validationDelete = false
           this.$emit('enregistrer')
       })
       .catch((error) => {
           console.log(error);
       })
-    },
-    sendDeleteF(){
-      axios.delete(`${this.serv}/finales`,
-        {
-          headers: {'Authorization': 'Bearer ' + this.token},
-          data: {
-            piece: this?.datas.piece,
-            idVariante: this.variante._id
-          }
-        }
-      )
-      .then( (response) => {
-        this.setOuvertures(response.data.ouvertures)
-        this.validationDelete = false
-        this.$emit('enregistrer')
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+
     }
   },
   data () {
@@ -115,17 +97,11 @@ export default {
       type: Object,
       default: null,
       required: true
-    },
-    datas :{ 
-      type: Object,
-      default: null,
-      required: true
     }
-    
   },
   components : {BaseIconButton,BaseButton},
   emits: ['edit','enregistrer'],
-  inject: ['serv','setOuvertures']
+  inject: ['serv','setOuvertures','setFinales']
     
 }
 </script>

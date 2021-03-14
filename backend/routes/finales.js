@@ -78,4 +78,26 @@ router.put('/', async (req,res) => {
     
 })
 
+/**
+ * Ajoute une finale à une pièce
+ * @param piece
+ * @param idFinale
+*/
+router.delete('/', async (req,res) => {
+    connect()
+    const datas = req.body;
+    const myUser = await User.findOne({ _id: datas.iduser })
+    
+    //Est-ce que notre utilisateur existe ?
+    if(myUser === null) return res.status(401).json({message : 'Utilisateur non trouvé'})
+    if(!myUser.finales[datas.piece]) return res.status(401).json({message : 'Cette pièce n\'existe pas'})
+    
+    myUser.finales[datas.piece] = myUser.finales[datas.piece].filter((finale) => finale._id != datas.idFinale)
+    await myUser.save()
+    const updatedValues = await User.findOne({ _id: datas.iduser })
+
+    return res.status(201).json({message : 'Finale supprimée', finales: updatedValues.finales})
+    
+})
+
 module.exports = router;

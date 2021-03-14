@@ -54,6 +54,7 @@ router.post('/', async (req, res) => {
 router.put('/', async (req,res) => {
     const datas = req.body
     connect()
+    
     //await User.updateOne(
     //{ 
     //    "_id": datas.iduser,
@@ -88,9 +89,9 @@ router.put('/', async (req,res) => {
     foundO.commentaire = datas.commentaire
     foundO.img = datas.img
     await myUser.save()
-
+    setTimeout(function(){
     return res.status(200).json({message : 'Ouverture modifiée', ouvertures: myUser.ouvertures})
-     
+    },2000)
 })
 
 /**

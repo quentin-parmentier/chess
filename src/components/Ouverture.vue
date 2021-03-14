@@ -1,5 +1,5 @@
 <template lang="">
-    <router-link :to="{ name: 'Variantes', params: {id:index, color:color, type:'ouvertures'}}">
+    <router-link :to="{ name: 'Variantes', params: {id:index, color:ouverture.color, type:'ouvertures'}}">
       <div class="flex bg-white rounded-md shadow-basic">
         <div class="flex-1" @mouseover="() => this.isHover = true" @mouseout="() => this.isHover = false">
           <div class="h-28 flex ">
@@ -54,7 +54,6 @@
 import RoundedArrow from './RoundedArrow.vue'
 import BaseIconButton from '../components/BaseIconButton.vue'
 import BaseButton from '../components/BaseButton.vue'
-const axios = require('axios');
 
 export default {
   created () {
@@ -70,15 +69,8 @@ export default {
       this.validationDelete = true
     },
     sendDelete(){
-      axios.delete(`${this.serv}/ouvertures`,
-        {
-          headers: {'Authorization': 'Bearer ' + this.token},
-          data: {
-            color: this.color,
-            idOuverture: this.ouverture._id
-          }
-        }
-      )
+      
+      this.ouverture.delete(this.serv)
       .then( (response) => {
           this.setOuvertures(response.data.ouvertures)
           this.validationDelete = false
@@ -103,11 +95,6 @@ export default {
   props: {
     ouverture: { 
       type: Object,
-      default: null,
-      required: true
-    },
-    color: { 
-      type: String,
       default: null,
       required: true
     },
