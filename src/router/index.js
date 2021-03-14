@@ -8,36 +8,34 @@ const routes = [
     component: Home
   },
   {
+    path: '/connexion',
+    name: 'Connexion',
+    
+    component: () => import('../views/Connexion.vue')
+  },
+  {
     path: '/ouvertures',
     name: 'Color',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ChoixColor.vue')
+    
+    component: () => import('../views/ChoixColor.vue')
   },
   {
     path: '/finales',
     name: 'Finales',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ChoixFinales.vue')
+    
+    component: () => import('../views/ChoixFinales.vue')
   },
   {
     path: '/ouvertures/:color',
     name: 'Ouvertures',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ChoixOuverture.vue')
+    
+    component: () => import('../views/ChoixOuverture.vue')
   },
   {
     path: '/:type/:color/:id',
     name: 'Variantes',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ChoixVariantes.vue')
+    
+    component: () => import('../views/ChoixVariantes.vue')
   }
 ]
 
@@ -48,7 +46,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'Login' && !localStorage.getItem('token')) next({ name: 'Login' })
+  if (to.name !== 'Connexion' && !localStorage.getItem('token')) next({ name: 'Connexion' })
+  else next()
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.name === 'Connexion' && localStorage.getItem('token')) next({ name: 'Themes' })
   else next()
 })
 

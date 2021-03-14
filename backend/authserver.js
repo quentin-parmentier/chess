@@ -12,6 +12,14 @@ const corsOptions = {
 app.use(bodyParser.json())
 app.use(cors(corsOptions))
 
+var authMiddleWare = function (req, res, next) {
+    req.body = req.body.data ?? req.body
+    next()
+}
+
+app.use(authMiddleWare)
+
+
 //Routes
 const authRoutes = require('./routes/auth.js')
 app.use('/', authRoutes)

@@ -7,7 +7,7 @@
                 <input 
                     ref="editableInput" 
                     class="w-full p-2 shadow-innerinput rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" 
-                    :class="prefixIcon !== '' ? 'bg-no-repeat pl-9 bg-icon-left bg-'+prefixIcon : '' "
+                    :class="classes()"
                     :value="inputValue"
                     :type="type"
                     @focus="isEditing = true" 
@@ -20,6 +20,10 @@
                 /> 
                 <p> {{suffixe}} </p>
             </div>
+            <p 
+                class="px-2 text-red-600 font-semibold text-sm"
+                v-if="error"
+            > {{error}} </p>
         </div>
        
     </div>
@@ -44,6 +48,12 @@ export default {
     validateChange(){
         this.isEditing = false
         this.$emit('change:inputValue')
+    },
+    classes(){
+        let css = ""
+        css = this.prefixIcon !== '' ? 'bg-no-repeat pl-9 bg-icon-left bg-'+this.prefixIcon : ''
+        css += this.error ? ' ring-2 ring-inset ring-red-500' : ''
+        return css
     }
   },
   data () {
@@ -90,6 +100,11 @@ export default {
         required:{
             type: Boolean,
             default: false,
+            required: false
+        },
+        error:{
+            type:String,
+            default: "",
             required: false
         }
     }

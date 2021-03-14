@@ -16,23 +16,33 @@ const connect = require('../globals/connection.js');
 /**
  * Create a user
  * @param pseudo
+ * @param mail
  * @param password
  */
 router.post('/signup', async (req, res) => {
+
     const password = req.body.password
-    if(!password) res.status(401).json({message : "Mot de passe invalide"})
+    const mail = req.body.mail
+    const pseudo = req.body.pseudo
+
+    //Vérifications
+    if(!password || password.length < 6 || password.length > 20) return res.status(401).json({message:"Votre mot de passe doit faire entre 6 et 20 caractères"})
+    const regexEmail = /^\S+@\S+\.\S+$/
+    if(!mail || mail.length > 50 || !regexEmail.test(mail)) return res.status(401).json({message:"Format e-mail incorrect"})
+    if(!pseudo || pseudo.length < 4 || pseudo.length > 20) return res.status(401).json({message:"Votre pseudo doit faire entre 4 et 20 caractères"})
     const hash = await bcrypt.hash(password, 10)
     
     //On crypte le password
     const addedUser = new User({
-        pseudo:req.body.pseudo,
+        pseudo:pseudo,
+        mail:mail,
         password:hash
     })
-   
+
     await connect()
     addedUser.save()
     .then(() => res.status(201).json({message : 'Utilisateur créé'}))
-    .catch((error) => res.status(400).json({error}))
+    .catch((error) => res.status(401).json({message : error}))
     
 });
 
@@ -46,7 +56,6 @@ router.post('/login', async (req,res) => {
     await connect()
     const username = req.body.pseudo
     const password = req.body.password
-    //
 
     //On cherche dans la bdd
     const user = await User.findOne({
