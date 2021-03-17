@@ -1,7 +1,9 @@
 <template>
     
     <div class="flex flex-col min-h-screen">
-      <h1 class="h1"> Que voir ? </h1>
+      <!-- TOP : Titre  -->
+      <h1 class="h1"> Finales ou Ouvertures ? </h1>
+      <!-- CENTER : Différentes parties de l'application  -->
       <div class="flex-1 flexcenter">
         <router-link class="bisquare" :to="{ name: 'Finales' }">
           <square-image img="finale" />

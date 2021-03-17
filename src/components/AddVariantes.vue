@@ -26,93 +26,36 @@ import BaseSwitch from '../components/BaseSwitch.vue'
 import Variante from '../classes/Variante'
 import Finale from '../classes/Finale'
 
-const axios = require('axios');
-
 export default {
     methods: {
         editVariante(){
-            console.log(this.variante)
-            this.variante.update(this.serv)
-            .then((response) => {
+            this.variante.update()
+            .then((datas) => {
                 switch (true) {
                     case this.variante instanceof Variante:
-                        this.setOuvertures(response.data.ouvertures)
+                        this.setOuvertures(datas.ouvertures)
                         break;
                     case this.variante instanceof Finale:
-                        this.setFinales(response.data.finales)
+                        this.setFinales(datas.finales)
                         break;
                 }
                 this.$emit('enregistrer')
             })
-            .catch((error) => {
-                console.log(error);
-            }) 
         },
         recVariante(){
-            console.log(this.variante)
-            this.variante.add(this.serv)
-            .then((response) => {
+            this.variante.add()
+            .then((datas) => {
                 switch (true) {
                     case this.variante instanceof Variante:
-                        this.setOuvertures(response.data.ouvertures)
+                        this.setOuvertures(datas.ouvertures)
                         break;
                     case this.variante instanceof Finale:
-                        this.setFinales(response.data.finales)
+                        this.setFinales(datas.finales)
                         break;
                 }
                 this.$emit('enregistrer')
             })
-            .catch((error) => {
-                console.log(error);
-            })
         },
-        recFinales(){
-            const origine = this.variante.origine ? 'lichess' : null
-            axios.post(`${this.serv}/finales`,
-                {
-                    data: {
-                        piece: this.piece,
-                        name:this.name,
-                        commentaire:this.commentaire,
-                        idEmbed:this.idEmbed,
-                        idOuverture:this.id,
-                        origine:origine
-                    },
-                },
-                {headers: {'Authorization': 'Bearer ' + this.token}}
-            )
-            .then( (response) => {
-                this.setFinales(response.data.finales)
-                this.$emit('enregistrer')
-            })
-            .catch((error) => {
-                console.log(error);
-            }) 
-        },
-        editFinale(){
-            const origine = this.variante.origine ? 'lichess' : null
-            axios.put(`${this.serv}/finales`,
-                {
-                    data: {
-                        piece: this.piece,
-                        name:this.name,
-                        commentaire:this.commentaire,
-                        idEmbed:this.idEmbed,
-                        idOuverture:this.id,
-                        idFinale: this.editV._id,
-                        origine:origine
-                    },
-                },
-                {headers: {'Authorization': 'Bearer ' + this.token}}
-            )
-            .then( (response) => {
-                this.setFinales(response.data.finales)
-                this.$emit('enregistrer')
-            })
-            .catch((error) => {
-                console.log(error);
-            }) 
-        }
     },
     components: {BaseInput,BaseButton,BaseSwitch},
     data () {
@@ -127,7 +70,7 @@ export default {
             required: false
         }
     },
-    inject:['serv','setOuvertures', 'setFinales'],
+    inject:['setOuvertures', 'setFinales'],
     emits:['enregistrer']
     
     

@@ -4,9 +4,9 @@
     <div class="m-auto max-w-px800 min-h-fullvh">
       <!-- TOP Bar des ouvertures -->
       <div class="flex">
-        <div class=" self-center w-24 ">
+        <div class=" self-center w-24">
           <router-link :to="{ name: 'Color'}"> 
-            <base-button label="Retour" prefixIcon="arrow_back" /> 
+            <base-button :third="true" color='btn-return'  label="Retour" prefixIcon="arrow_back" /> 
           </router-link>
         </div>
         <div class="flex-1">
@@ -22,7 +22,7 @@
       <!-- CENTER - List des ouvertures ou SVG pour inviter à ajouter -->
       <!-- Oppening list  -->
       <div v-if="oppenings.length > 0">
-        <div class="pb-3" v-for="(ouverture,index) in oppenings" :key="index" > 
+        <div class="pb-3 px-3" v-for="(ouverture,index) in oppenings" :key="index" > 
           <component-ouverture :ouverture="objectify(ouverture)" :index="index" @edit="(ouvertureE) => startEdit(ouvertureE)" @enregistrer="() => refreshO()" />
         </div>
       </div>

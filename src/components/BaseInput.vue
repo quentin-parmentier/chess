@@ -17,8 +17,10 @@
                     @keydown.escape="validateChange"
                     :placeholder="this.placeholder" 
                     :required="this.required"
-                /> 
+                    :autocomplete="this.autocomplete"
+                />
                 <p> {{suffixe}} </p>
+                <slot> </slot>
             </div>
             <p 
                 class="px-2 text-red-600 font-semibold text-sm"
@@ -105,6 +107,11 @@ export default {
         error:{
             type:String,
             default: "",
+            required: false
+        },
+        autocomplete:{
+            type: String,
+            default: "on",
             required: false
         }
     }

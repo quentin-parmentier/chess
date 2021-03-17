@@ -14,4 +14,5 @@ const VarianteSchema = mongoose.Schema({
         type: Boolean, required: false
     }
 })
+
 module.exports = VarianteSchema;

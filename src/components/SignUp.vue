@@ -1,14 +1,40 @@
 <template lang="">
-    <div @click="() => this.$emit('closeModal')" 
-        class=" bg-gray-300 opacity-40 w-full h-full z-50 absolute top-0 left-0"></div>
-    <div class="shadow-modal rounded-md fixed min-w-max top-1/2 left-1/2 mt-n214 ml-n122 bg-white opacity-100 z-50 p-5 animate-pop">
-        <div class="text-center font-bold text-lg pb-5"> Créer votre compte</div>
-        <div class="space-y-2">
-            <base-input :error="errors.pseudo" placeholder="MonSuperPseudo" :isEditable="false" v-model:inputValue="pseudo" label="Pseudo" @focusout="vPseudo"/>
-            <base-input :error="errors.email" placeholder="MonSuper@email.com" :isEditable="false" v-model:inputValue="email" label="Email" @focusout="vEmail"/>
-            <base-input :error="errors.mdp" placeholder="MonSuperMotDePasse" :isEditable="false" v-model:inputValue="mdp" label="Mot de passe" @focusout="vMdp"/>
+    <!-- ALL : Voile qui empêche de cliquer en dessous  -->
+    <div 
+        @click="() => this.$emit('closeModal')" 
+        class=" bg-gray-300 opacity-40 w-full h-full z-50 absolute top-0 left-0">
+    </div>
+    <div class="min-w-full shadow-modal rounded-md fixed left-0 bottom-0 bg-white opacity-100 z-50 p-5 animate-slide">
+        <!-- TOP : Titre  -->
+        <div class="text-center font-bold text-lg pb-5"> Créer mon compte</div>
+        
+        <!-- CENTER : Formulaire d'inscription  -->
+        <div class="space-y-2 max-w-sm m-auto">
+            <base-input autocomplete="username" :error="errors.pseudo" placeholder="MonSuperPseudo" :isEditable="false" v-model:inputValue="pseudo" label="Pseudo" @focusout="vPseudo"/>
+            <base-input autocomplete="email" :error="errors.email" type="email" placeholder="MonSuper@email.com" :isEditable="false" v-model:inputValue="email" label="Email" @focusout="vEmail"/>
+            <base-input 
+                :error="errors.mdp" 
+                placeholder="MonSuperMotDePasse" 
+                :isEditable="false" 
+                v-model:inputValue="mdp" 
+                label="Mot de passe" 
+                @focusout="vMdp"
+                :type="showPsw ? '' : 'password'"
+                autocomplete="new-password"
+            >
+                <svg-eye @showPsw="(show) => showPsw = show" />
+            </base-input> 
             
-            <base-button class="flex justify-evenly p-3" label="Inscription" @click="validation" />
+            <base-button class="flex justify-evenly p-3" label="M'inscrire" @click="validation" />
+        </div>
+        <!-- BOTTOM : Swap pour connexion  -->
+        <div class="flex items-center justify-center">
+            <p class=" font-semibold">J'ai déjà un compte ! </p>
+            <base-button 
+                :third="true" 
+                color="shadow-none text-blue-700 transform-none" 
+                label="Je me connecte" 
+                @click="this.$emit('openLogin')" />
         </div>
     </div>
 </template>
@@ -16,8 +42,9 @@
 <script>
     import BaseInput from '../components/BaseInput.vue'
     import BaseButton from '../components/BaseButton.vue'
-    import {checkPseudo, checkMdp, checkEmail} from '../fonctions/Validateurs'
-    const axios = require('axios');
+    import SvgEye from '../components/SvgEye.vue'
+    import {checkPseudo, checkMdp, checkEmail} from '../facades/AuthValidateurs'
+    import {createUser} from '../facades/UserActions'
 
 export default {
     methods: {
@@ -37,22 +64,11 @@ export default {
             checkEmail(this.email,this.errors)
         },
         inscription(){
-            const token = localStorage.getItem('token')
-            axios.post(`${this.auth}/signup`,
-            {
-                data: {
-                    pseudo: this.pseudo,
-                    mail:this.email,
-                    password:this.mdp
-                },
-            },
-            {headers: {'Authorization': 'Bearer ' + token}})
+            createUser(this.pseudo,this.email,this.mdp)
             .then(() => {
-                //On se remet sur l'écran de connexion
                 //On showMsg('Utilisateur créé')
-            })
-            .catch(() => {
-                //On showMsg('error')
+                //On se remet sur l'écran de connexion
+                this.$emit('openLogin')
             })
         }
     },
@@ -61,12 +77,12 @@ export default {
             pseudo:"",
             email:"",
             mdp:"",
-            errors:{}
+            errors:{},
+            showPsw:false
         }
     },
-    components: { BaseInput, BaseButton },
-    inject: ['auth'],
-    emits: ['closeModal']
+    components: { BaseInput, BaseButton, SvgEye },
+    emits: ['closeModal','openLogin']
     
 }
 </script>

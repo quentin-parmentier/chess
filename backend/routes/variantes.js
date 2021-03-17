@@ -19,8 +19,15 @@ const connect = require('../globals/connection.js')
  * @param origine (Optionnel)
 */
 router.post('/', async (req,res) => {
-    connect()
+    
     const datas = req.body;
+
+    //Validateur
+    if(!datas.name || datas.name == "") return res.status(400).json({message : 'Le nom de la variante est obligatoire'})
+    if(!datas.idEmbed || datas.idEmbed == "") return res.status(400).json({message : "L'id de la variante est obligatoire"})
+
+    connect()
+
     const myUser = await User.findOne({ _id: datas.iduser })
     
     //Est-ce que notre utilisateur existe ?
@@ -28,8 +35,7 @@ router.post('/', async (req,res) => {
     
     //Si les données envoyées sont correctes (type : ouverture ou finale)
     if(! myUser?.ouvertures?.[datas.color]) return res.status(400).json({message : 'Type ou couleur inconnue'})
-    if(!datas.name || datas.name == "") return res.status(400).json({message : 'Le nom de la variante est obligatoire'})
-
+    
     //On cherche notre ouverture
     const foundO = myUser.ouvertures[datas.color].find(el => el._id == datas.idOuverture)
     if(!foundO) return res.status(400).json({message : 'Cette ouverture n\'existe pas'})
@@ -65,8 +71,14 @@ router.post('/', async (req,res) => {
  * @param origine (Optionnel)
  */
 router.put('/', async (req,res) => {
-    connect()
     const datas = req.body;
+
+    //Validateur
+    if(!datas.name || datas.name == "") return res.status(400).json({message : 'Le nom de la variante est obligatoire'})
+    if(!datas.idEmbed || datas.idEmbed == "") return res.status(400).json({message : "L'id de la variante est obligatoire"})
+
+    connect()
+    
     const myUser = await User.findOne({ _id: datas.iduser })
 
     //Est-ce que notre utilisateur existe ?

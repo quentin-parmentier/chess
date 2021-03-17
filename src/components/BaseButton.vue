@@ -1,10 +1,9 @@
 <template>
     <div>
         <button 
-        class=" shadow-md rounded-md font-bold p-2 focus:outline-none 
-        transform transition duration-300 hover:-translate-y-0.5 hover:shadow-littleup"
+        class="  font-bold p-2 focus:outline-none "
         :class="[(prefixIcon !== '' ? 'bg-no-repeat pl-9 bg-icon-left bg-'+prefixIcon : ''),
-                color]"
+                color, (!third ? 'shadow-md rounded-md transform transition duration-300 hover:-translate-y-0.5 hover:shadow-littleup' : '')]"
         :type="type"
         >{{label}}</button>
     </div>
@@ -32,6 +31,11 @@ export default {
       default: '',
       required: false
     },
+    third: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
   },
     
 }

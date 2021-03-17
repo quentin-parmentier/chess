@@ -20,8 +20,14 @@ const connect = require('../globals/connection.js')
  * @param origine (Optionnel)
 */
 router.post('/', async (req,res) => {
-    connect()
+    
     const datas = req.body;
+    //Validateurs
+    if(!datas.name || datas.name == "") return res.status(400).json({message : 'Le nom de la variante est obligatoire'})
+    if(!datas.idEmbed || datas.idEmbed == "") return res.status(400).json({message : "L'id de la variante est obligatoire"})
+
+    connect()
+
     const myUser = await User.findOne({ _id: datas.iduser })
     
     //Est-ce que notre utilisateur existe ?
@@ -55,8 +61,12 @@ router.post('/', async (req,res) => {
  * @param idFinale
 */
 router.put('/', async (req,res) => {
-    connect()
     const datas = req.body;
+    //Validateurs
+    if(!datas.name || datas.name == "") return res.status(400).json({message : 'Le nom de la variante est obligatoire'})
+    if(!datas.idEmbed || datas.idEmbed == "") return res.status(400).json({message : "L'id de la variante est obligatoire"})
+
+    connect()
     const myUser = await User.findOne({ _id: datas.iduser })
     
     //Est-ce que notre utilisateur existe ?

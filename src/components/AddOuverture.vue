@@ -21,25 +21,18 @@ import BaseButton from '../components/BaseButton.vue'
 
 export default {
     methods: {
-        async rec(){
-            await this.ouverture.add(this.serv)
-            .then((response) => {
-                this.setOuvertures(response.data.ouvertures)
+        rec(){
+            this.ouverture.add()
+            .then((datas) => {
+                this.setOuvertures(datas.ouvertures)
                 this.$emit('enregistrer')
-            })
-            .catch(() => {
-                
             })
         },
-        async edit(){
-            //update
-            await this.ouverture.update(this.serv)
-            .then((response) => {
-                this.setOuvertures(response.data.ouvertures)
+        edit(){
+            this.ouverture.update()
+            .then((datas) => {
+                this.setOuvertures(datas.ouvertures)
                 this.$emit('enregistrer')
-            })
-            .catch(() => {
-                
             })
         }
     },
@@ -56,7 +49,7 @@ export default {
             required: false
         }
     },
-    inject:['serv','setOuvertures'],
+    inject:['setOuvertures'],
     emits:['enregistrer']
 }
 </script>

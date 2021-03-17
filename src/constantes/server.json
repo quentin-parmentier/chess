@@ -1,0 +1,4 @@
+{
+    "authServ" : "http://localhost:4000",
+    "dataServ" : "http://localhost:3000"
+}

@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       height:{
-        px425:"425px",
+        px425:"425px"
       },
       inset:{
         vh80:"80vh",
@@ -30,6 +30,9 @@ module.exports = {
       minWidth:{
         "400":"400px"
       },
+      spacing: {
+        "200":"200px"
+      },
       boxShadow: {
         "basic":"#a8a7a7 5px 7px 4px 0px",
         "modal":"#a8a7a7 0px 6px 35px",
@@ -40,7 +43,8 @@ module.exports = {
       },
       animation: {
         "pop" : "pop ease 300ms",
-        "write": "write ease 1000ms"
+        "write": "write ease 1000ms",
+        "slide": "slide ease 300ms"
       },
       backgroundImage: {
         'arrow_back': "url('./assets/img/arrow_back.svg')",
@@ -49,6 +53,7 @@ module.exports = {
         'finale': "url('./assets/img/finale.svg')",
         'ouverture': "url('./assets/img/ouverture.svg')",
         'pion': "url('./assets/img/pion.svg')",
+        'tour': "url('./assets/img/tour.svg')",
         'cross': "url('./assets/img/cross.svg')",
         'edit': "url('./assets/img/edit.svg')",
         'empty_o': "url('./assets/img/empty_o.svg')",
@@ -65,10 +70,17 @@ module.exports = {
         'icon-right':"right center",
         'center' : "center center"
       },
+      flex:{
+        '45':'0 0 45vh'
+      },
       keyframes: {
         pop: {
           '0%': { transform: 'scale(0)' },
           '100%': { transform: 'scale(1)' }
+        },
+        slide: {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0%)' }
         },
         write: {
           '0%': { transform: 'rotate(0deg) translateX(0px)'},
@@ -108,12 +120,30 @@ module.exports = {
         fontSize: "1.875rem",
         lineHeight: "2.25rem"
       },
+      '.titleRegister' : {
+        padding:"1.2rem",
+        textAlign:"center",
+        fontWeight:"700",
+        fontSize: "1.875rem",
+        lineHeight: "2.25rem"
+      },
       '.h2' : {
         padding:"2rem",
         textAlign:"center",
         fontWeight:"700",
         fontSize: "1.5rem",
         lineHeight: "2rem"
+      },
+      '.h4' : {
+        textAlign:"center",
+        fontWeight:"400",
+        fontSize: "1.2rem",
+        lineHeight: "1.5rem"
+      },
+      '.btn-return' : {
+        marginLeft:"10px",
+        boxShadow:"none",
+        color:"#2563EB"
       }
     }
       addComponents(globalComponents)

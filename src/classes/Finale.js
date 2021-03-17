@@ -1,5 +1,5 @@
-const axios = require('axios');
-
+import {dataServ} from '../constantes/server.json'
+import {postRequest, putRequest, deleteRequest} from '../facades/AxiosMethodes'
 export default class Finale {
     constructor({_id,name,commentaire,id,origine} = {},color,piece){
         this.id = _id;
@@ -11,57 +11,39 @@ export default class Finale {
         this.origine= origine
     }
 
-    update(serv){
+    update(){
 
-        const token = localStorage.getItem('token')
-        const promise = axios.put(`${serv}/finales`,
-        {
-            data: {
-                piece:this.piece,
-                name:this.name,
-                commentaire:this.commentaire,
-                idEmbed:this.idEmbed,
-                origine:this.origine,
-                idFinale:this.id
-            },
-        },
-        {headers: {'Authorization': 'Bearer ' + token}})
-        
-        return promise;
+        const params = {
+            piece:this.piece,
+            name:this.name,
+            commentaire:this.commentaire,
+            idEmbed:this.idEmbed,
+            origine:this.origine,
+            idFinale:this.id
+        }
+        return putRequest(dataServ,'finales',params)
     }
 
     //Call API : Ajouter une ouverture
-    add(serv){
+    add(){
 
-        const token = localStorage.getItem('token')
-        const promise = axios.post(`${serv}/finales`,
-        {
-            data: {
-                piece:this.piece,
-                name:this.name,
-                commentaire:this.commentaire,
-                idEmbed:this.idEmbed,
-                origine:this.origine
-            },
-        },
-        {headers: {'Authorization': 'Bearer ' + token}})
-        
-        return promise
+        const params = {
+            piece:this.piece,
+            name:this.name,
+            commentaire:this.commentaire,
+            idEmbed:this.idEmbed,
+            origine:this.origine
+        }
+        return postRequest(dataServ,'finales',params)
     }
 
-    delete(serv){
-        const token = localStorage.getItem('token')
-        const promise = axios.delete(`${serv}/finales`,
-        {
-          headers: {'Authorization': 'Bearer ' + token},
-          data: {
+    delete(){
+
+        const params = {
             piece: this.piece,
             idFinale: this.id
-          }
         }
-      )
-
-        return promise;
+        return deleteRequest(dataServ,'finales',params)
 
     }
 }

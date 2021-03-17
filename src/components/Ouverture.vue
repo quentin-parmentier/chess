@@ -1,9 +1,10 @@
 <template lang="">
+    <!-- ALL : Contour de l'ouverture  -->
     <router-link :to="{ name: 'Variantes', params: {id:index, color:ouverture.color, type:'ouvertures'}}">
       <div class="flex bg-white rounded-md shadow-basic">
         <div class="flex-1" @mouseover="() => this.isHover = true" @mouseout="() => this.isHover = false">
           <div class="h-28 flex ">
-
+            <!-- LEFT-CENTER : Informations en ligne  -->
             <div class=" h-full w-28">
               <img :src="ouverture.img" ref="img" :onerror="() => changeImg()" alt="" class="h-full rounded-l-md object-cover">
             </div>
@@ -20,8 +21,7 @@
             </div>
           </div>
         </div>
-        
-
+        <!-- RIGHT : Bouttons d'action de l'ouverture  -->
         <div class=" w-12 flex flex-col py-3 justify-around" @click="(e) => e.preventDefault()">
           <base-icon-button 
             @click="(e) => deleteO(e)"
@@ -36,6 +36,8 @@
         </div>
       </div>
     </router-link>
+
+    <!-- MODAL : Fenêtre pour supprimer mon ouverture  -->
     <div v-if="validationDelete">
       <div class="bg-gray-500 opacity-40 w-full h-full z-40 absolute top-0 left-0" @click="() => validationDelete = false"></div>
       <div class="fixed space-y-2 font-bold top-1/2 left-1/2 mt-n188 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop">
@@ -70,14 +72,11 @@ export default {
     },
     sendDelete(){
       
-      this.ouverture.delete(this.serv)
-      .then( (response) => {
-          this.setOuvertures(response.data.ouvertures)
-          this.validationDelete = false
-          this.$emit('enregistrer')
-      })
-      .catch((error) => {
-          console.log(error);
+      this.ouverture.delete()
+      .then((response) => {
+        this.setOuvertures(response.ouvertures)
+        this.validationDelete = false
+        this.$emit('enregistrer')
       })
     },
     changeImg(){
@@ -106,7 +105,7 @@ export default {
       
   },
   emits:['edit','enregistrer'],
-  inject:['serv','setOuvertures']
+  inject:['setOuvertures']
     
 }
 </script>

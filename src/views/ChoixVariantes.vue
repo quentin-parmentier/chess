@@ -4,7 +4,7 @@
 		<!-- TOP Bar des ouvertures -->
 		<div class="flex">
 			<div class=" self-center w-24 ">
-				<base-button label="Retour" prefixIcon="arrow_back" @click="back()" /> 
+				<base-button :third="true" color='btn-return' label="Retour" prefixIcon="arrow_back" @click="back()" /> 
 			</div>
 			<div class=" self-center flex-1 pr-24">
 				<h2 class="h2"> 
@@ -16,7 +16,7 @@
 		<!-- CENTER -->
 		<!-- Variantes list  -->
 		<div v-if="etude?.['variantes']?.length > 0">
-			<div v-for="(variante,index) in etude['variantes']" :key="index" class="pb-4" > 
+			<div v-for="(variante,index) in etude['variantes']" :key="index" class="pb-4 px-3" > 
 				<component-variante 
 					:variante="objectify(variante)" 
 					@enregistrer="() => newVariante()" 

@@ -13,10 +13,3 @@ export const createFinales = () => {
   
   return {setFinales, storeFinales : readonly(state)}
 }
-
-export const server = () => {
-  const serv = "http://localhost:3000"
-  const auth = "http://localhost:4000"
-
-  return {serv : readonly(serv), auth : readonly(auth)}
-}

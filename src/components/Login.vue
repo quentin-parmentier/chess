@@ -1,13 +1,37 @@
 <template lang="">
     <div @click="() => this.$emit('closeModal')" 
         class=" bg-gray-300 opacity-40 w-full h-full z-50 absolute top-0 left-0"></div>
-    <div class="shadow-modal rounded-md fixed min-w-max top-1/2 left-1/2 mt-n168 ml-n122 bg-white opacity-100 z-50 p-5 animate-pop">
-        <div class="text-center font-bold text-lg pb-5"> Connexion</div>
-        <div class="space-y-2">
-            <base-input :error="errors.pseudo" placeholder="MonSuperPseudo" :isEditable="false" v-model:inputValue="pseudo" label="Pseudo" @focusout="vPseudo"/>
-            <base-input :error="errors.mdp" placeholder="MonSuperMotDePasse" :isEditable="false" v-model:inputValue="mdp" label="Mot de passe" @focusout="vMdp"/>
+    <div class="min-w-full shadow-modal rounded-md fixed left-0 bottom-0 bg-white opacity-100 z-50 p-5 animate-slide">
+        <div class="text-center font-bold text-lg pb-5"> Se connecter </div>
+            <div class="space-y-2 max-w-sm m-auto">
+                <base-input autocomplete="username" :error="errors.pseudo" placeholder="MonSuperPseudo" :isEditable="false" v-model:inputValue="pseudo" label="Pseudo" @focusout="vPseudo"/>
+                <base-input 
+                    autocomplete="current-password" 
+                    :error="errors.mdp" 
+                    placeholder="MonSuperMotDePasse" 
+                    :isEditable="false" 
+                    v-model:inputValue="mdp" 
+                    label="Mot de passe" 
+                    @focusout="vMdp"
+                    :type="showPsw ? '' : 'password'"
+                >
+                    <svg-eye @showPsw="(show) => showPsw = show" />
+                </base-input>
+
+                <base-button class="flex justify-evenly p-3" label="Me connecter" @click="validation" />
+            </div>
+
+            <div class="flex items-center justify-center">
+                <p class=" font-semibold">Je n'ai pas encore de compte ! </p>
+                <base-button 
+                    :third="true" 
+                    color=" shadow-none text-blue-700 transform-none" 
+                    label="Je m'inscris" 
+                    @click="this.$emit('openSignup')"
+                />
+            </div>
+        <div>
             
-            <base-button class="flex justify-evenly p-3" label="Connexion" @click="validation" />
         </div>
     </div>
 </template>
@@ -15,8 +39,9 @@
 <script>
     import BaseInput from '../components/BaseInput.vue'
     import BaseButton from '../components/BaseButton.vue'
-    import {checkPseudo, checkMdp} from '../fonctions/Validateurs'
-    const axios = require('axios');
+    import {checkPseudo, checkMdp} from '../facades/AuthValidateurs'
+    import SvgEye from '../components/SvgEye.vue'
+    import {connectUser,getUser} from '../facades/UserActions'
 
 export default {
     methods: {
@@ -29,29 +54,22 @@ export default {
         validation(){
             let isOk = checkPseudo(this.pseudo,this.errors) 
             isOk &= checkMdp(this.mdp,this.errors)
-            if(isOk) this.inscription()
+            if(isOk) this.connexion()
         },
-        inscription(){
-            const token = localStorage.getItem('token')
-            axios.post(`${this.auth}/login`,
-            {
-                data: {
-                    pseudo: this.pseudo,
-                    password:this.mdp
-                },
-            },
-            {headers: {'Authorization': 'Bearer ' + token}})
-            .then((response) => {
-                //On init le token
-                console.log(response)
-                //localStorage.setItem('token',response.accessToken);
-                //localStorage.setItem('refreshToken',response.refreshToken);
-                //On showMsg('Connexion reussi')
+        connexion(){
+            //On connecte notre utilisateur
+            connectUser(this.pseudo,this.mdp)
+            .then(() => {
+                
+                //Une fois connecté on récupère ses infos
+                getUser()
+                .then((user) => {
+                    this.setOuvertures(user.ouvertures)
+                    this.setFinales(user.finales)
 
-                //On change de vue
-            })
-            .catch(() => {
-                //On showMsg('error')
+                    //On change de vue
+                    this.$router.push({name:'Themes'})
+                })
             })
         }
     },
@@ -59,12 +77,13 @@ export default {
         return {
             pseudo:"",
             mdp:"",
-            errors:{}
+            errors:{},
+            showPsw: false
         }
     },
-    components: { BaseInput, BaseButton },
-    inject: ['auth'],
-    emits: ['closeModal']
+    components: { BaseInput, BaseButton, SvgEye },
+    inject: ['setOuvertures','setFinales'],
+    emits: ['closeModal','openSignup']
     
 }
 </script>
