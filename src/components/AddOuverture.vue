@@ -4,7 +4,7 @@
     <div class="shadow-modal rounded-md fixed min-w-max top-1/2 left-1/2 mt-n188 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop"> 
         <div class="text-center font-bold text-lg pb-5">Créer une nouvelle ouverture</div>
         <div class="space-y-2">
-            <base-input :required="true" :isEditable="false" v-model:inputValue="ouverture.name" label="Nom de l'ouverture" id="name-oppening" placeholder="Le système de Londres"></base-input>
+            <base-input :error="errors.name" :isEditable="false" v-model:inputValue="ouverture.name" label="Nom de l'ouverture" id="name-oppening" placeholder="Le système de Londres"></base-input>
             <base-input :isEditable="false" v-model:inputValue="ouverture.commentaire" label="Commentaire" id="name-oppening" placeholder="Une super ouverture pour débuter"></base-input>
             <base-input :isEditable="false" v-model:inputValue="ouverture.img" label="Url de l'image" id="name-oppening" placeholder="www.ma_super_image.com"></base-input>
             <div class="flex justify-evenly">
@@ -18,10 +18,11 @@
 
 import BaseInput from '../components/BaseInput.vue'
 import BaseButton from '../components/BaseButton.vue'
-
+import {checkName} from '../facades/VarianteValidateurs'
 export default {
     methods: {
         rec(){
+            if(this.vName())
             this.ouverture.add()
             .then((datas) => {
                 this.setOuvertures(datas.ouvertures)
@@ -29,17 +30,22 @@ export default {
             })
         },
         edit(){
+            if(this.vName())
             this.ouverture.update()
             .then((datas) => {
                 this.setOuvertures(datas.ouvertures)
                 this.$emit('enregistrer')
             })
+        },
+        vName(){
+            return checkName(this.ouverture.name,this.errors)
         }
     },
     components: {BaseInput,BaseButton},
     data () {
         return {
-            ouverture: this.editO
+            ouverture: this.editO,
+            errors : {}
         }
     },
     props: {

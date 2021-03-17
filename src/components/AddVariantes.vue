@@ -4,12 +4,12 @@
     <div class="shadow-modal rounded-md fixed min-w-max top-1/2 left-1/2 mt-n214 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop"> 
         <div class="text-center font-bold text-lg pb-5">Créer une nouvelle variante</div>
         <div class="space-y-2">
-            <base-input :required="true" :isEditable="false" v-model:inputValue="variante.name" label="Nom de la variante" id="name-oppening" placeholder="c4 c5"></base-input>
+            <base-input :error="errors.name" :isEditable="false" v-model:inputValue="variante.name" label="Nom de la variante" id="name-oppening" placeholder="c4 c5"></base-input>
             <base-input :isEditable="false" v-model:inputValue="variante.commentaire" label="Commentaire" id="name-oppening" placeholder="Ligne1 $ Ligne2"></base-input>
             <base-switch v-model:inputValue="variante.origine" label="Origine de la variante">
                 {{variante.origine === true ? 'Lichess' : 'Chess.com'}}
             </base-switch>
-            <base-input :isEditable="false" v-model:inputValue="variante.idEmbed" label="Id Embed" id="name-oppening" :placeholder="variante.origine ? 'gjqSTfa8/BIRjoEum' : '654321'"></base-input>
+            <base-input :error="errors.idEmbed" :isEditable="false" v-model:inputValue="variante.idEmbed" label="Id Embed" id="name-oppening" :placeholder="variante.origine ? 'gjqSTfa8/BIRjoEum' : '654321'"></base-input>
             
             <div class="flex">
                 <base-button label="Enregistrer" class=" text-center p-3" @click="() => variante.id ? editVariante() : recVariante()" />
@@ -25,10 +25,12 @@ import BaseButton from '../components/BaseButton.vue'
 import BaseSwitch from '../components/BaseSwitch.vue'
 import Variante from '../classes/Variante'
 import Finale from '../classes/Finale'
+import {checkName, checkEmbed} from '../facades/VarianteValidateurs'
 
 export default {
     methods: {
         editVariante(){
+            if(this.vReady())
             this.variante.update()
             .then((datas) => {
                 switch (true) {
@@ -43,6 +45,7 @@ export default {
             })
         },
         recVariante(){
+            if(this.vReady())
             this.variante.add()
             .then((datas) => {
                 switch (true) {
@@ -56,11 +59,23 @@ export default {
                 this.$emit('enregistrer')
             })
         },
+        vName(){
+            return checkName(this.variante.name,this.errors)
+        },
+        vEmbed(){
+            return checkEmbed(this.variante.idEmbed,this.errors)
+        },
+        vReady(){
+            let isOk = this.vName() 
+            isOk &= this.vEmbed() 
+            return isOk
+        }
     },
     components: {BaseInput,BaseButton,BaseSwitch},
     data () {
         return {
-            variante: this.editV
+            variante: this.editV,
+            errors: {}
         }
     },
     props: {

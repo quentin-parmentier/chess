@@ -49,19 +49,19 @@
 export default {
     methods: {
         validation(){
-            let isOk = checkPseudo(this.pseudo,this.errors) 
-            isOk &= checkMdp(this.mdp,this.errors) 
-            isOk &= checkEmail(this.email,this.errors)
+            let isOk = this.vPseudo() 
+            isOk &= this.vMdp() 
+            isOk &= this.vEmail()
             if(isOk) this.inscription()
         },
         vPseudo(){
-            checkPseudo(this.pseudo,this.errors)
+            return checkPseudo(this.pseudo,this.errors)
         },
         vMdp(){
-            checkMdp(this.mdp,this.errors)
+            return checkMdp(this.mdp,this.errors)
         },
         vEmail(){
-            checkEmail(this.email,this.errors)
+            return checkEmail(this.email,this.errors)
         },
         inscription(){
             createUser(this.pseudo,this.email,this.mdp)

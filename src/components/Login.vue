@@ -46,14 +46,14 @@
 export default {
     methods: {
         vPseudo(){
-            checkPseudo(this.pseudo,this.errors) 
+            return checkPseudo(this.pseudo,this.errors) 
         },
         vMdp(){
-            checkMdp(this.mdp,this.errors)
+            return checkMdp(this.mdp,this.errors)
         },
         validation(){
-            let isOk = checkPseudo(this.pseudo,this.errors) 
-            isOk &= checkMdp(this.mdp,this.errors)
+            let isOk = this.vPseudo() 
+            isOk &= this.vMdp()
             if(isOk) this.connexion()
         },
         connexion(){

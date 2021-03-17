@@ -22,7 +22,7 @@
     </div>
                               <!-- Partie des commentaires -->
       <div class=" font-medium px-8 py-5" :class="showiFrame?'border-b-0':''">
-        <p v-for="(ligne,index) in variante.commentaire.split('$')" :key="index">
+        <p v-for="(ligne,index) in variante?.commentaire?.split('$')" :key="index">
           {{ligne}}
         </p>
       </div>

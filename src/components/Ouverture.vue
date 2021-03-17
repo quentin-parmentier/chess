@@ -6,7 +6,7 @@
           <div class="h-28 flex ">
             <!-- LEFT-CENTER : Informations en ligne  -->
             <div class=" h-full w-28">
-              <img :src="ouverture.img" ref="img" :onerror="() => changeImg()" alt="" class="h-full rounded-l-md object-cover">
+              <img :src="ouverture.img || imgHolder " ref="img" :onerror="() => changeImg()" alt="" class="h-full rounded-l-md object-cover">
             </div>
             <div class=" flex-1 pl-12 self-center break-all">
               <div class=" font-bold text-xl">
@@ -58,9 +58,7 @@ import BaseIconButton from '../components/BaseIconButton.vue'
 import BaseButton from '../components/BaseButton.vue'
 
 export default {
-  created () {
-    this.token = localStorage.getItem('token')
-  },
+
   methods: {
     editO(e){
       e.preventDefault();
@@ -71,7 +69,6 @@ export default {
       this.validationDelete = true
     },
     sendDelete(){
-      
       this.ouverture.delete()
       .then((response) => {
         this.setOuvertures(response.ouvertures)
@@ -80,7 +77,7 @@ export default {
       })
     },
     changeImg(){
-      this.$refs.img.src = 'https://via.placeholder.com/150?text=No img'
+      this.$refs.img.src = this.imgHolder
     }
   },
   components: { RoundedArrow,BaseIconButton,BaseButton },
@@ -88,7 +85,7 @@ export default {
     return {
       isHover: false,
       validationDelete: false,
-      token: ""
+      imgHolder: 'https://via.placeholder.com/150?text=No img'
     }
   },
   props: {
