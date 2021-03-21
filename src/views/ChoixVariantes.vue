@@ -1,6 +1,6 @@
 <template lang="">
-<div class="relative">
-	<div class="max-w-px800 m-auto min-h-fullvh">
+<div>
+	<div class="max-w-px800 m-auto">
 		<!-- TOP Bar des ouvertures -->
 		<div class="flex">
 			<div class=" self-center w-24 ">

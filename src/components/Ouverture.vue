@@ -16,7 +16,7 @@
                 {{ouverture.commentaire}}
               </div>
             </div>
-            <div class="w-16">
+            <div class=" hidden sm:block sm:w-16">
               <rounded-arrow :hover="isHover"> </rounded-arrow>
             </div>
           </div>

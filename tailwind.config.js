@@ -25,13 +25,15 @@ module.exports = {
         "400":"400px"
       },
       maxWidth:{
-        px800:"800px"
+        px800:"800px",
+        '128':"128px"
       },
       minWidth:{
         "400":"400px"
       },
       spacing: {
-        "200":"200px"
+        "200":"200px",
+        "56":"56px"
       },
       boxShadow: {
         "basic":"#a8a7a7 5px 7px 4px 0px",
@@ -143,7 +145,10 @@ module.exports = {
       '.btn-return' : {
         marginLeft:"10px",
         boxShadow:"none",
-        color:"#2563EB"
+        color:"#2563EB",
+        '&:hover':{
+          color:"#4c7ce6"
+        }
       }
     }
       addComponents(globalComponents)

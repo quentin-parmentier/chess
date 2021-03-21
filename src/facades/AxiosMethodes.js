@@ -21,9 +21,10 @@ export function postRequest(serv, ressource, params = {}){
     {headers: {'Authorization': 'Bearer ' + token}})
     .then((response) => response = response.data)
     .catch((err) => {
+        //Wish
+        //this.$toast.show(err.response.data.message);
         throw err.response.data.message
     })
-    
 }
 
 export function putRequest(serv, ressource, params = {}){

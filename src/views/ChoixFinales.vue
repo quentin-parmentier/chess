@@ -14,11 +14,8 @@
 
                             <!-- Toutes les finales  -->
     <div class="flexcenter flex-1">
-      <router-link class="bisquare" :to="{ name: 'Variantes', params: {color:'white',id:'pion',type:'finales'}}">
-        <square-image img="pion" />
-      </router-link> 
-      <router-link class="bisquare" :to="{ name: 'Variantes', params: {color:'white',id:'tour',type:'finales'}}">
-        <square-image img="tour" />
+      <router-link v-for="(finale,index) in finales" :key="index" class="bisquare" :to="{ name: 'Variantes', params: {color:finale,id:'pion',type:'finales'}}">
+        <square-image :img="finale" />
       </router-link> 
     </div>
       
@@ -29,8 +26,14 @@
 <script>
 import BaseButton from '../components/BaseButton.vue'
 import SquareImage from '../components/SquareImage.vue'
+import {finales} from '../constantes/finales'
 
 export default {
+  data () {
+    return {
+      finales
+    }
+  },
   components: {
     SquareImage,
     BaseButton

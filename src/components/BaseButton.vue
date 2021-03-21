@@ -3,7 +3,8 @@
         <button 
         class="  font-bold p-2 focus:outline-none "
         :class="[(prefixIcon !== '' ? 'bg-no-repeat pl-9 bg-icon-left bg-'+prefixIcon : ''),
-                color, (!third ? 'shadow-md rounded-md transform transition duration-300 hover:-translate-y-0.5 hover:shadow-littleup' : '')]"
+                color, 
+                (!third ? 'shadow-md rounded-md transform transition duration-300 hover:-translate-y-0.5 hover:shadow-littleup' : '')]"
         :type="type"
         >{{label}}</button>
     </div>

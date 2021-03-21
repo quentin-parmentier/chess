@@ -32,7 +32,7 @@
             <p class=" font-semibold">J'ai déjà un compte ! </p>
             <base-button 
                 :third="true" 
-                color="shadow-none text-blue-700 transform-none" 
+                color="btn-return" 
                 label="Je me connecte" 
                 @click="this.$emit('openLogin')" />
         </div>

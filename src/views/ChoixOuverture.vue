@@ -1,46 +1,44 @@
 <template>
-  <div class="relative">
-    
-    <div class="m-auto max-w-px800 min-h-fullvh">
-      <!-- TOP Bar des ouvertures -->
-      <div class="flex">
-        <div class=" self-center w-24">
-          <router-link :to="{ name: 'Color'}"> 
-            <base-button :third="true" color='btn-return'  label="Retour" prefixIcon="arrow_back" /> 
-          </router-link>
-        </div>
-        <div class="flex-1">
-          <h2 class="h2"> Ouvertures {{color == 'white' ? 'blanches' : 'noires'}}</h2>
-        </div>
-        <div class=" self-center w-24 ">
-          <router-link :to="{ name: 'Ouvertures', params:{color:color == 'white' ? 'black' : 'white'}}"> 
-            <base-icon-button class="transition-transform duration-300 w-12 h-12 rounded-lg transform hover:rotate-45" :icon="color == 'white' ? 'blackpiece' : 'whitepiece'" /> 
-          </router-link>
-        </div>
+<div>
+  <div class="m-auto max-w-px800">
+    <!-- TOP Bar des ouvertures -->
+    <div class="flex">
+      <div class=" self-center w-24">
+        <router-link :to="{ name: 'Color'}"> 
+          <base-button :third="true" color='btn-return'  label="Retour" prefixIcon="arrow_back" /> 
+        </router-link>
       </div>
-
-      <!-- CENTER - List des ouvertures ou SVG pour inviter à ajouter -->
-      <!-- Oppening list  -->
-      <div v-if="oppenings.length > 0">
-        <div class="pb-3 px-3" v-for="(ouverture,index) in oppenings" :key="index" > 
-          <component-ouverture :ouverture="objectify(ouverture)" :index="index" @edit="(ouvertureE) => startEdit(ouvertureE)" @enregistrer="() => refreshO()" />
-        </div>
+      <div class="flex-1">
+        <h2 class="h2"> Ouvertures {{color == 'white' ? 'blanches' : 'noires'}}</h2>
       </div>
-      <!-- SVG CTA create -->
-      <div v-else class="h-full">
-         <empty-O />
-         <p class="text-gray-500 text-xl font-bold m-10 text-center">Vous n'avez pas encore ajouté d'ouverture</p>
+      <div class=" self-center w-24 px-3 ">
+        <router-link :to="{ name: 'Ouvertures', params:{color:color == 'white' ? 'black' : 'white'}}"> 
+          <base-icon-button class="transition-transform duration-300 w-12 h-12 rounded-lg transform hover:rotate-45 " :icon="color == 'white' ? 'blackpiece' : 'whitepiece'" /> 
+        </router-link>
       </div>
-
     </div>
 
-    <!-- Floating CTA Button to ADD ouverture -->
-    <rounded-add @click="() => this.isAdding = true"/> 
+    <!-- CENTER - List des ouvertures ou SVG pour inviter à ajouter -->
+    <!-- Oppening list  -->
+    <div v-if="oppenings.length > 0">
+      <div class="pb-3 px-3" v-for="(ouverture,index) in oppenings" :key="index" > 
+        <component-ouverture :ouverture="objectify(ouverture)" :index="index" @edit="(ouvertureE) => startEdit(ouvertureE)" @enregistrer="() => refreshO()" />
+      </div>
+    </div>
+    <!-- SVG CTA create -->
+    <div v-else class="h-full">
+        <empty-O />
+        <p class="text-gray-500 text-xl font-bold m-10 text-center">Vous n'avez pas encore ajouté d'ouverture</p>
+    </div>
 
-    <!-- Composant pour ajouter/modifier des ouvertures -->
-    <add-ouverture :editO="editOppening" v-if="isAdding || isEditing" @enregistrer="() => refreshO()" />
-  
   </div>
+
+  <!-- Floating CTA Button to ADD ouverture -->
+  <rounded-add @click="() => this.isAdding = true"/> 
+
+  <!-- Composant pour ajouter/modifier des ouvertures -->
+  <add-ouverture :editO="editOppening" v-if="isAdding || isEditing" @enregistrer="() => refreshO()" />
+</div>
 </template>
 
 <script>
