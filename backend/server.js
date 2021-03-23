@@ -1,5 +1,6 @@
 //Requires
-const app = require('express')()
+const express = require('express')
+const app = express()
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
@@ -14,6 +15,8 @@ const corsOptions = {
 //Middleware
 app.use(bodyParser.json())
 app.use(cors(corsOptions))
+
+app.use(express.static(__dirname + '/../dist/'))
 
 //Middleware pour jwt
 var authenticateToken = function (req, res, next) {
