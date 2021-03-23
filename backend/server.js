@@ -16,8 +16,6 @@ const corsOptions = {
 app.use(bodyParser.json())
 app.use(cors(corsOptions))
 
-app.use(express.static(__dirname + '/../dist/'))
-
 //Middleware pour jwt
 var authenticateToken = function (req, res, next) {
     const authHeader = req.headers['authorization']
@@ -52,11 +50,14 @@ app.use('/finales', finalesRoutes)
 const authRoutes = require('./routes/auth.js')
 app.use('/auth', authRoutes)
 
-app.get('*', (req,res) => {
-    res.status(404).json({message:"Not found"})
-})
-
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(__dirname + '/../dist/'))
+    app.get(/.*/, (req, res) => res.sendFile(__dirname + '/../dist/index.html'))
+}
+//app.get('*', (req,res) => {
+//    res.status(404).json({message:"Not found"})
+//})
 
 //Listener
-const port = process.env.port || 3000;
+const port = 3000;
 app.listen(port)
