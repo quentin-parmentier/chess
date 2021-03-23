@@ -33,7 +33,7 @@ var authenticateToken = function (req, res, next) {
       next()
     })
 }
-app.use(authenticateToken)
+//app.use(authenticateToken)
 
 //Routes
 const usersRoutes = require('./routes/users.js')
