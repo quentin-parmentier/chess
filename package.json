@@ -6,8 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "auth": "nodemon ./backend/authserver.js",
-    "server": "nodemon ./backend/server.js",
+    "auth": "node ./backend/authserver.js",
+    "server": "node ./backend/server.js",
     "start": "concurrently --kill-others \"npm run auth\" \"npm run server\""
   },
   "dependencies": {
