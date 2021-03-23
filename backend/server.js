@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 require('dotenv').config()
-
+console.log("ok")
 //Options
 const corsOptions = {
     origin : 'http://localhost:8080',
