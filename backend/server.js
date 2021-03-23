@@ -1,4 +1,5 @@
 //Requires
+const base = '/api'
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -36,24 +37,23 @@ app.use(authenticateToken)
 
 //Routes
 const usersRoutes = require('./routes/users.js')
-app.use('/users', usersRoutes)
+app.use(`${base}/users`, usersRoutes)
 
 const ouverturesRoutes = require('./routes/ouvertures.js')
-app.use('/ouvertures', ouverturesRoutes)
+app.use(`${base}/ouvertures`, ouverturesRoutes)
 
 const variantesRoutes = require('./routes/variantes.js')
-app.use('/variantes', variantesRoutes)
+app.use(`${base}/variantes`, variantesRoutes)
 
 const finalesRoutes = require('./routes/finales.js')
-app.use('/finales', finalesRoutes)
+app.use(`${base}/finales`, finalesRoutes)
 
 const authRoutes = require('./routes/auth.js')
-app.use('/auth', authRoutes)
+app.use(`${base}/auth`, authRoutes)
 
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(__dirname + '/../dist/'))
-    app.get(/.*/, (req, res) => res.sendFile(__dirname + '/../dist/index.html'))
-}
+app.use(express.static(__dirname + '/../dist/'))
+app.get(/.*/, (req, res) => res.sendFile(__dirname + '/../dist/index.html'))
+
 //app.get('*', (req,res) => {
 //    res.status(404).json({message:"Not found"})
 //})

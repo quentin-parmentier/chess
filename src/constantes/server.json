@@ -1,4 +1,4 @@
 {
-    "authServ" : "http://localhost:4000",
-    "dataServ" : "http://localhost:3000"
+    "authServ" : "http://localhost:4000/api",
+    "dataServ" : "http://localhost:3000/api"
 }

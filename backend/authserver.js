@@ -1,3 +1,4 @@
+const base = '/api'
 const app = require('express')()
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -22,7 +23,7 @@ app.use(authMiddleWare)
 
 //Routes
 const authRoutes = require('./routes/auth.js')
-app.use('/', authRoutes)
+app.use(`${base}/`, authRoutes)
 
 app.get('*', (req,res) => {
     res.status(404).json({message:"Not found"})
