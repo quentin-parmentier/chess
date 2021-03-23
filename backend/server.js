@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 require('dotenv').config()
-console.log("ok")
+
 //Options
 const corsOptions = {
     origin : 'http://localhost:8080',
@@ -33,7 +33,7 @@ var authenticateToken = function (req, res, next) {
       next()
     })
 }
-//app.use(authenticateToken)
+app.use(authenticateToken)
 
 //Routes
 const usersRoutes = require('./routes/users.js')
@@ -59,5 +59,6 @@ app.get(/.*/, (req, res) => res.sendFile(__dirname + '/../dist/index.html'))
 //})
 
 //Listener
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port)
+.then(() => console.log('start listening'))
