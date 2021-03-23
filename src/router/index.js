@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Themes',
     component: () => import('../views/Home.vue')
   },
@@ -41,6 +41,12 @@ const routes = [
     name: 'Variantes',
     
     component: () => import('../views/ChoixVariantes.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'Catch',
+    
+    component: () => import('../views/Home.vue')
   }
 ]
 

@@ -1,29 +1,37 @@
 const axios = require('axios');
+import {showSuccess, showError} from './Toast'
 
 export function getRequest(serv, ressource){
     const token = localStorage.getItem('token')
     return axios.get(`${serv}/${ressource}`,
     {headers: {'Authorization': 'Bearer ' + token}})
-    .then((response) =>  response = response.data)
+    .then((response) => {
+        response = response.data
+        if(response.message) showSuccess(response.message)
+        return response
+    })
     .catch((err) => {
-        throw err.response.data.message
+        showError(err.response.data.message)
+        throw err.response.data.champs
     })
 }
 
 export function postRequest(serv, ressource, params = {}){
 
     const token = localStorage.getItem('token')
-
     return axios.post(`${serv}/${ressource}`,
     {
         data: params,
     },
     {headers: {'Authorization': 'Bearer ' + token}})
-    .then((response) => response = response.data)
+    .then((response) => {
+        response = response.data
+        if(response.message) showSuccess(response.message)
+        return response
+    })
     .catch((err) => {
-        //Wish
-        //this.$toast.show(err.response.data.message);
-        throw err.response.data.message
+        showError(err.response.data.message)
+        throw err.response.data.champs
     })
 }
 
@@ -36,8 +44,13 @@ export function putRequest(serv, ressource, params = {}){
         data: params
     },
     {headers: {'Authorization': 'Bearer ' + token}})
-    .then((response) => response = response.data)
+    .then((response) => {
+        response = response.data
+        if(response.message) showSuccess(response.message)
+        return response
+    })
     .catch((err) => {
+        showError(err.response.data.message)
         throw err.response.data.message
     })
 }
@@ -51,8 +64,13 @@ export function deleteRequest(serv, ressource, params = {}){
         headers: {'Authorization': 'Bearer ' + token},
         data: params
     })
-    .then((response) => response = response.data)
+    .then((response) => {
+        response = response.data
+        if(response.message) showSuccess(response.message)
+        return response
+    })
     .catch((err) => {
+        showError(err.response.data.message)
         throw err.response.data.message
     })
 }

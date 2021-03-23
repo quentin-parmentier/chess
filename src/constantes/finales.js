@@ -1,1 +1,1 @@
-export const finales = ['pion','tour'];
+export const finales = ['pion','tour','dame'];

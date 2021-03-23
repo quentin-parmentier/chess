@@ -28,7 +28,7 @@
     <!-- SVG CTA create -->
     <div v-else class="h-full">
         <empty-O />
-        <p class="text-gray-500 text-xl font-bold m-10 text-center">Vous n'avez pas encore ajouté d'ouverture</p>
+        <p class="text-gray-500 text-xl font-bold text-center">Vous n'avez pas encore ajouté d'ouverture</p>
     </div>
 
   </div>

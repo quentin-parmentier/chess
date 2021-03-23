@@ -8,6 +8,9 @@ const FinaleSchema = mongoose.Schema({
     },
     tour : {
         type: [VarianteSchema], required: false
+    },
+    dame : {
+        type: [VarianteSchema], required: false
     }
 })
 

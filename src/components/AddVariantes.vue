@@ -1,7 +1,7 @@
 <template lang="">
     <div @click="() => this.$emit('enregistrer')" 
-        class=" bg-gray-300 opacity-40 w-full h-full z-50 absolute top-0 left-0"></div>
-    <div class="shadow-modal rounded-md fixed min-w-max top-1/2 left-1/2 mt-n214 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop"> 
+        class=" bg-gray-300 opacity-40 w-full h-full z-50 fixed top-0 left-0"></div>
+    <div class="shadow-modal rounded-md fixed min-w-max top-1/2 left-1/2 mt-n214 ml-n195 bg-white opacity-100 z-50 p-5 animate-pop"> 
         <div class="text-center font-bold text-lg pb-5">Créer une nouvelle variante</div>
         <div class="space-y-2">
             <base-input :error="errors.name" :isEditable="false" v-model:inputValue="variante.name" label="Nom de la variante" id="name-oppening" placeholder="c4 c5"></base-input>
@@ -43,6 +43,7 @@ export default {
                 }
                 this.$emit('enregistrer')
             })
+            .finally(() => this.wait = false)
         },
         recVariante(){
             if(this.vReady())
@@ -58,6 +59,7 @@ export default {
                 }
                 this.$emit('enregistrer')
             })
+            .finally(() => this.wait = false)
         },
         vName(){
             return checkName(this.variante.name,this.errors)
@@ -67,7 +69,9 @@ export default {
         },
         vReady(){
             let isOk = this.vName() 
-            isOk &= this.vEmbed() 
+            isOk &= this.vEmbed()
+            isOk &= !this.wait
+            if(isOk) this.wait = true
             return isOk
         }
     },
@@ -75,7 +79,8 @@ export default {
     data () {
         return {
             variante: this.editV,
-            errors: {}
+            errors: {},
+            wait: false
         }
     },
     props: {

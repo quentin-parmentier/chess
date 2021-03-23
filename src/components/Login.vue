@@ -1,6 +1,6 @@
 <template lang="">
     <div @click="() => this.$emit('closeModal')" 
-         class=" bg-gray-300 opacity-40 w-full h-full z-50 absolute top-0 left-0">
+         class=" bg-gray-300 opacity-40 w-full h-full z-50 fixed top-0 left-0">
     </div>
     <div class="min-w-full shadow-modal rounded-md fixed left-0 bottom-0 bg-white opacity-100 z-50 p-5 animate-slide">
         <div class="text-center font-bold text-lg pb-5"> Se connecter </div>
@@ -54,6 +54,8 @@ export default {
         validation(){
             let isOk = this.vPseudo() 
             isOk &= this.vMdp()
+            isOk &= !this.wait
+            if(isOk) this.wait = true
             if(isOk) this.connexion()
         },
         connexion(){
@@ -71,6 +73,7 @@ export default {
                     this.$router.push({name:'Themes'})
                 })
             })
+            .finally(() => this.wait = false)
         }
     },
     data () {
@@ -78,7 +81,8 @@ export default {
             pseudo:"",
             mdp:"",
             errors:{},
-            showPsw: false
+            showPsw: false,
+            wait: false
         }
     },
     components: { BaseInput, BaseButton, SvgEye },

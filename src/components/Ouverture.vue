@@ -6,7 +6,7 @@
           <div class="h-28 flex ">
             <!-- LEFT-CENTER : Informations en ligne  -->
             <div class=" h-full w-28">
-              <img :src="ouverture.img || imgHolder " ref="img" :onerror="() => changeImg()" alt="" class="h-full rounded-l-md object-cover">
+              <img :src="ouverture.img || imgHolder " ref="img" :onerror="() => changeImg()" alt="Openning icon" class="h-full rounded-l-md object-cover">
             </div>
             <div class=" flex-1 pl-12 self-center break-all">
               <div class=" font-bold text-xl">
@@ -39,8 +39,8 @@
 
     <!-- MODAL : Fenêtre pour supprimer mon ouverture  -->
     <div v-if="validationDelete">
-      <div class="bg-gray-500 opacity-40 w-full h-full z-40 absolute top-0 left-0" @click="() => validationDelete = false"></div>
-      <div class="fixed space-y-2 font-bold top-1/2 left-1/2 mt-n188 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop">
+      <div class="bg-gray-500 opacity-40 w-full h-full z-40 fixed top-0 left-0" @click="() => validationDelete = false"></div>
+      <div class="fixed space-y-2 font-bold top-1/2 left-1/2 mt-n188 ml-n195 bg-white opacity-100 z-50 p-5 animate-pop">
         <h3 class="text-center">Confirmez-vous la suppression de l'ouverture :</h3>
         <p class="text-center font-medium">{{ouverture.name}}</p>
          <div class="flex justify-evenly">

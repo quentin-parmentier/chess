@@ -18,6 +18,7 @@
                     :placeholder="this.placeholder" 
                     :required="this.required"
                     :autocomplete="this.autocomplete"
+                    :disabled="disabled ? true : false"
                 />
                 <p> {{suffixe}} </p>
                 <slot> </slot>
@@ -112,6 +113,11 @@ export default {
         autocomplete:{
             type: String,
             default: "on",
+            required: false
+        },
+        disabled:{
+            type: Boolean,
+            default: false,
             required: false
         }
     }

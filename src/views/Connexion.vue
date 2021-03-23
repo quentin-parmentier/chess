@@ -1,5 +1,6 @@
 <template>
-    <div class="max-w-2xl m-auto max-h-screen pb-12 flex flex-col">
+<div>
+    <div class="max-w-2xl m-auto min-h-fullvh max-h-screen pb-12 flex flex-col">
         <!-- TOP : Grosse image  -->
         <div class="w-full flex-45">
             <svg-register />
@@ -21,7 +22,7 @@
     <!-- Fenêtres modales pour connexion / inscription  -->
     <login v-if="login" @openSignup="() => {signup=true; login=false} " @closeModal="() => login = false" />
     <sign-up v-if="signup" @openLogin="() => {login=true; signup=false}" @closeModal="() => signup = false" />
-
+</div>
 </template>
 <script>
 import SignUp from '../components/SignUp.vue'

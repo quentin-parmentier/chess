@@ -14,7 +14,7 @@
 
                             <!-- Toutes les finales  -->
     <div class="flexcenter flex-1">
-      <router-link v-for="(finale,index) in finales" :key="index" class="bisquare" :to="{ name: 'Variantes', params: {color:finale,id:'pion',type:'finales'}}">
+      <router-link v-for="(finale,index) in finales" :key="index" class="smallsquare" :to="{ name: 'Variantes', params: {color:'white',id:finale,type:'finales'}}">
         <square-image :img="finale" />
       </router-link> 
     </div>

@@ -46,6 +46,9 @@ app.use('/variantes', variantesRoutes)
 const finalesRoutes = require('./routes/finales.js')
 app.use('/finales', finalesRoutes)
 
+const authRoutes = require('./routes/auth.js')
+app.use('/auth', authRoutes)
+
 app.get('*', (req,res) => {
     res.status(404).json({message:"Not found"})
 })

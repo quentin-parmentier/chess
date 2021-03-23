@@ -13,9 +13,10 @@ module.exports = {
       },
       margin:{
         n122:"-122px",
-        n143:"-143.5px",
         n168:"-168px",
+        n174:"-174px",
         n188:"-188px",
+        n195:"-195px",
         n214:"-214px",
       },
       minHeight:{
@@ -56,8 +57,11 @@ module.exports = {
         'ouverture': "url('./assets/img/ouverture.svg')",
         'pion': "url('./assets/img/pion.svg')",
         'tour': "url('./assets/img/tour.svg')",
+        'dame': "url('./assets/img/dame.svg')",
         'cross': "url('./assets/img/cross.svg')",
         'edit': "url('./assets/img/edit.svg')",
+        'accueil': "url('./assets/img/accueil.svg')",
+        'profil': "url('./assets/img/profil.svg')",
         'empty_o': "url('./assets/img/empty_o.svg')",
         'empty_v': "url('./assets/img/empty_v.svg')",
       },
@@ -105,6 +109,14 @@ module.exports = {
         maxWidth:"400px",
         minHeight:"250px",
         maxHeight:"400px",
+        height:"80vw",
+        flex:"0 1 80vw"
+      },
+      '.smallsquare': {
+        minWidth:"250px",
+        maxWidth:"250px",
+        minHeight:"250px",
+        maxHeight:"250px",
         height:"80vw",
         flex:"0 1 80vw"
       },

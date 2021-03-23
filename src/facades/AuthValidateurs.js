@@ -17,3 +17,14 @@ export function checkEmail(email,errors){
     if(email.length < 50 && regexEmail.test(email)) return true
     errors.email = "Format e-mail incorrect"
 }
+
+export function checkIdentique(pswNew,pswConfirm,errors){
+    errors.pswNew = null
+    errors.pswConfirm = null
+    if(pswNew.length < 6 || pswNew.length > 20){
+        errors.pswNew = "Entre 6 et 20 caratères"
+        return false
+    }
+    if(pswNew == pswConfirm) return true
+    if(pswConfirm != "") errors.pswConfirm = "Non identique"
+}

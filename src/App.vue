@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-fullvh text-gray-800 bg-gray-50">
-    <top-bar class="bottom-0 sm:top-0" />
-    <router-view class="pb-56 sm:pt-56 sm:pb-0" />
+    <top-bar class="bottom-0 sm:top-0" v-if="showBar()" />
+    <router-view :class="showBar() ? 'pb-56 sm:pt-56 sm:pb-0' : ''" />
   </div>
 </template>
 
@@ -11,7 +11,13 @@ import { provide } from 'vue'
 import {createOuvertures, createFinales} from './store'
 import {getUser} from './facades/UserActions'
 import TopBar from './components/TopBar.vue'
+
 export default {
+  methods: {
+    showBar(){
+      return !['Connexion'].includes(this.$route.name)
+    }
+  },
   components: { TopBar },
   created () {
 
