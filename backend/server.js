@@ -61,4 +61,3 @@ app.get(/.*/, (req, res) => res.sendFile(__dirname + '/../dist/index.html'))
 //Listener
 const port = process.env.PORT || 3000;
 app.listen(port)
-.then(() => console.log('start listening'))
