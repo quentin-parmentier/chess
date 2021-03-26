@@ -1,7 +1,7 @@
 <template lang="">
     <div @click="() => this.$emit('enregistrer')" 
         class=" bg-gray-300 opacity-40 w-full h-full z-50 fixed top-0 left-0"></div>
-    <div class="shadow-modal rounded-md fixed min-w-max top-1/2 left-1/2 mt-n188 ml-n195 bg-white opacity-100 z-50 p-5 animate-pop"> 
+    <div class="shadow-modal rounded-md fixed min-w-max top-1/2 left-1/2 mt-n188 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop"> 
         <div class="text-center font-bold text-lg pb-5">Créer une nouvelle ouverture</div>
         <div class="space-y-2">
             <base-input :error="errors.name" :isEditable="false" v-model:inputValue="ouverture.name" label="Nom de l'ouverture" id="name-oppening" placeholder="Le système de Londres"></base-input>

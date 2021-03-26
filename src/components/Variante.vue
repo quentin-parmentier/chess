@@ -37,7 +37,7 @@
                     <!-- FENETRE MODAL POUR SUPPRIMER LA VARIANTE -->
   <div v-if="validationDelete">
     <div class="bg-gray-500 opacity-40 w-full h-full z-40 fixed top-0 left-0" @click="() => validationDelete = false"></div>
-    <div class="rounded-md fixed space-y-2 font-bold top-1/2 left-1/2 mt-n188 ml-n195 bg-white opacity-100 z-50 p-5 animate-pop">
+    <div class="rounded-md fixed space-y-2 font-bold top-1/2 left-1/2 mt-n188 ml-n143 bg-white opacity-100 z-50 p-5 animate-pop">
       <h3 class="text-center">Confirmez-vous la suppression de la variante :</h3>
       <p class="text-center font-medium">{{variante.name}}</p>
         <div class="flex justify-evenly">
