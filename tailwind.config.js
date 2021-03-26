@@ -13,6 +13,7 @@ module.exports = {
       },
       margin:{
         n122:"-122px",
+        n143:"-143px",
         n168:"-168px",
         n174:"-174px",
         n188:"-188px",
