@@ -5,17 +5,17 @@
              (hover && !selected) ? 'text-white bg-blue-700' : '']">
         <router-link class="h-full flex justify-center items-center" :to="{ name:to, params: params}">
             <div>
-                <div 
-                class=" bg-center h-6 bg-no-repeat bg-contain sm:hidden"
-                :class="'bg-'+icon"></div>
+                <base-image class="h-6 m-auto" :img="icon" />
                 <div class=" pt-0.5">{{text}}</div>
             </div>
         </router-link>
     </div>
 </template>
 <script>
+import BaseImage from './BaseImage.vue'
 
 export default {
+  components: { BaseImage },
     methods: {
         isSelected(route){
             this.selected =  route.name == this.to || route.fullPath.indexOf(this.match?.toLowerCase()) != -1

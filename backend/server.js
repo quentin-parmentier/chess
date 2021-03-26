@@ -6,11 +6,13 @@ const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 require('dotenv').config()
+var path = require('path');
 
 //Options
+var whitelist = ['http://localhost:8080', 'http://localhost:3000']
 const corsOptions = {
-    origin : 'http://localhost:8080',
-    optionsSuccessStatus: 200
+  origin: '*',
+  optionsSuccessStatus: 200
 }
 
 //Middleware
@@ -19,6 +21,7 @@ app.use(cors(corsOptions))
 
 //Middleware pour jwt
 var authenticateToken = function (req, res, next) {
+    if(req.path.indexOf(`${base}`) == -1) return next()
     const authHeader = req.headers['authorization']
     //Bearer + Token
     const token = authHeader && authHeader.split(' ')[1]
@@ -52,11 +55,10 @@ const authRoutes = require('./routes/auth.js')
 app.use(`${base}/auth`, authRoutes)
 
 app.use(express.static(__dirname + '/../dist/'))
-app.get(/.*/, (req, res) => res.sendFile(__dirname + '/../dist/index.html'))
-
-//app.get('*', (req,res) => {
-//    res.status(404).json({message:"Not found"})
-//})
+app.get(/.*/, (req, res) => res.sendFile(path.resolve(__dirname + '/../dist/index.html')))
+app.get('*', (req,res) => {
+    res.status(404).json({message:"Not found"})
+})
 
 //Listener
 const port = process.env.PORT || 3000;

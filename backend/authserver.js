@@ -5,7 +5,7 @@ const cors = require('cors')
 
 //Options
 const corsOptions = {
-    origin : 'http://localhost:8080',
+    origin : '*',
     optionsSuccessStatus: 200
 }
 
@@ -19,7 +19,6 @@ var authMiddleWare = function (req, res, next) {
 }
 
 app.use(authMiddleWare)
-
 
 //Routes
 const authRoutes = require('./routes/auth.js')

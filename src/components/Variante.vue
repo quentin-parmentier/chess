@@ -10,12 +10,12 @@
       <div class="rounded-tr-md w-16 flex py-3 justify-around bg-gray-500" @click="(e) => e.preventDefault()">
           <base-icon-button 
             @click="(e) => deleteV(e)"
-            icon="cross"
+            icon="cross.svg"
             class="hover:rotate-90 transition duration-300 transform" 
           />
           <base-icon-button 
             @click="(e) => editV(e)"
-            icon="edit"
+            icon="edit.svg"
             class="hover:animate-write" 
           />
       </div>

@@ -6,10 +6,10 @@
       <!-- CENTER : Différentes parties de l'application  -->
       <div class="flex-1 flexcenter">
         <router-link class="bisquare" :to="{ name: 'Finales' }">
-          <square-image img="finale" />
+          <square-image img="finale.svg" />
         </router-link> 
         <router-link class="bisquare" :to="{ name: 'Color' }">
-          <square-image img="ouverture" />
+          <square-image img="ouverture.svg" />
         </router-link>
       </div>
        

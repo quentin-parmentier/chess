@@ -10,7 +10,7 @@ const RefreshModel = require('../models/refresh.js');
 const Refresh = mongoose.model('Refresh', RefreshModel);
 const router = express.Router()
 const connect = require('../globals/connection.js');
-
+const expiresIn = 60*15;
 //Toutes les routes ici commencent par /auth
 
 /**
@@ -81,7 +81,7 @@ router.post('/login', async (req,res) => {
     newRefresh.save()
 
     //On les retourne les deux
-    res.status(200).json({accessToken:accessToken, refreshToken:refreshToken})
+    res.status(200).json({accessToken, refreshToken, expiresIn})
 })
 
 /**
@@ -103,7 +103,7 @@ router.post('/refresh', async (req,res) => {
         if (err) return res.status(403).json({message : "Le jeton est corrompu"})
         //S'il est valide on en recréer un et on le réenvoi
         const accessToken = createToken({ iduser: user.iduser })
-        res.status(200).json({ accessToken: accessToken })
+        res.status(200).json({ accessToken, expiresIn })
     })
 })
 
@@ -178,7 +178,7 @@ router.put('/password', async(req, res) => {
 
 //Fonction permettant de créer un jwt
 function createToken(obj){
-    return jwt.sign(obj, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15d' })
+    return jwt.sign(obj, process.env.ACCESS_TOKEN_SECRET, { expiresIn })
 }
 
 

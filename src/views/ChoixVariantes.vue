@@ -4,7 +4,7 @@
 		<!-- TOP Bar des ouvertures -->
 		<div class="flex">
 			<div class=" self-center w-24 ">
-				<base-button :third="true" color='btn-return' label="Retour" prefixIcon="arrow_back" @click="back()" /> 
+				<base-button :third="true" color='btn-return' label="Retour" prefixIcon="arrow_back.svg" @click="back()" /> 
 			</div>
 			<div class=" self-center flex-1 pr-24">
 				<h2 class="h2"> 

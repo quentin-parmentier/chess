@@ -5,7 +5,7 @@
     <div class="flex">
       <div class=" self-center w-24">
         <router-link :to="{ name: 'Color'}"> 
-          <base-button :third="true" color='btn-return'  label="Retour" prefixIcon="arrow_back" /> 
+          <base-button :third="true" color='btn-return'  label="Retour" prefixIcon="arrow_back.svg" /> 
         </router-link>
       </div>
       <div class="flex-1">
@@ -13,7 +13,7 @@
       </div>
       <div class=" self-center w-24 px-3 ">
         <router-link :to="{ name: 'Ouvertures', params:{color:color == 'white' ? 'black' : 'white'}}"> 
-          <base-icon-button class="transition-transform duration-300 w-12 h-12 rounded-lg transform hover:rotate-45 " :icon="color == 'white' ? 'blackpiece' : 'whitepiece'" /> 
+          <base-icon-button class="transition-transform duration-300 w-12 h-12 rounded-lg transform hover:rotate-45 " :icon="color == 'white' ? 'black.svg' : 'white.svg'" /> 
         </router-link>
       </div>
     </div>

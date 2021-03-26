@@ -5,7 +5,7 @@
     <div class="flex">
       <div class=" self-center w-1/4 text-center ">
         <router-link :to="{ name: 'Themes'}"> 
-          <base-button :third="true" color='btn-return' label="Retour" prefixIcon="arrow_back" /> 
+          <base-button :third="true" color='btn-return' label="Retour" prefixIcon="arrow_back.svg" /> 
         </router-link>
       </div>
       <h1 class="h1 flex-1"> Les finales </h1>
@@ -15,7 +15,7 @@
                             <!-- Toutes les finales  -->
     <div class="flexcenter flex-1">
       <router-link v-for="(finale,index) in finales" :key="index" class="smallsquare" :to="{ name: 'Variantes', params: {color:'white',id:finale,type:'finales'}}">
-        <square-image :img="finale" />
+        <square-image :img="finale+'.svg'" />
       </router-link> 
     </div>
       

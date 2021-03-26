@@ -25,12 +25,12 @@
         <div class=" w-12 flex flex-col py-3 justify-around" @click="(e) => e.preventDefault()">
           <base-icon-button 
             @click="(e) => deleteO(e)"
-            icon="cross"
+            icon="cross.svg"
             class="hover:rotate-90 transition duration-300 transform" 
           />
           <base-icon-button 
             @click="(e) => editO(e)"
-            icon="edit"
+            icon="edit.svg"
             class="hover:animate-write" 
           />
         </div>
