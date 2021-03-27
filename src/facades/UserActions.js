@@ -9,8 +9,6 @@ export function connectUser(pseudo, password){
         localStorage.setItem('token',tokens.accessToken);
         localStorage.setItem('refreshToken',tokens.refreshToken);
 
-        //On set un timer qui va refresh le token
-        refreshUserToken(tokens.expiresIn)
         return tokens
     })
 }
@@ -18,19 +16,24 @@ export function connectUser(pseudo, password){
 function refreshUserToken(expiresIn){
 
     setTimeout(function(){ 
-        const refreshToken = localStorage.getItem('refreshToken');
-        const params = {token : refreshToken}
-        postRequest(dataServ,'auth/refresh',params)
-        .then((response) => {
-            if(!response.accessToken) return localStorage.removeItem('token')
-            localStorage.setItem('token',response.accessToken);
-            refreshUserToken(response.expiresIn)
-        })
-        .catch(() => {
-            localStorage.removeItem('token')
-            localStorage.removeItem('refreshToken')
-        })
+        getNewToken()
     }, (expiresIn - 60) * 1000);
+}
+
+function getNewToken(){
+    const refreshToken = localStorage.getItem('refreshToken');
+    const params = {token : refreshToken}
+    return postRequest(dataServ,'auth/refresh',params)
+    .then((response) => {
+        if(!response.accessToken) return localStorage.removeItem('token')
+        localStorage.setItem('token',response.accessToken);
+        refreshUserToken(response.expiresIn)
+        return response
+    })
+    .catch(() => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('refreshToken')
+    })
 }
 
 export function createUser(pseudo, mail, password){
@@ -39,11 +42,13 @@ export function createUser(pseudo, mail, password){
 }
 
 export async function getUser(){
+
+    await getNewToken()
+
     return await getRequest(dataServ, 'users')
     .then((user) => {
         user.ouvertures = user.ouvertures ?? {white:{},black:{}}
         user.finales = user.finales ?? ({pion:{},tour:{},dame:{}})
-        refreshUserToken(0)
         return user
     })
 }
