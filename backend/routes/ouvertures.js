@@ -21,7 +21,7 @@ const connect = require('../globals/connection.js');
  */
 router.post('/', async (req, res) => {
     const datas = req.body
-    connect(res)
+   await connect(res)
     const myUser = await User.findOne({ _id: datas.iduser })
 
     //Est-ce que notre utilisateur existe ?
@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
 */
 router.put('/', async (req,res) => {
     const datas = req.body
-    connect(res)
+   await connect(res)
     
     //await User.updateOne(
     //{ 
@@ -101,7 +101,7 @@ router.put('/', async (req,res) => {
 */
 router.delete('/', async (req,res) => {
     const datas = req.body
-    connect(res)
+   await connect(res)
 
     const myUser = await User.findOne({ _id: datas.iduser })
 

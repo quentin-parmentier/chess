@@ -39,7 +39,7 @@ router.post('/signup', async (req, res) => {
         password:hash
     })
 
-    connect(res)
+   await connect(res)
     console.log("apres la co")
     addedUser.save()
     .then(() => res.status(201).json({message : 'Utilisateur créé'}))
@@ -54,7 +54,7 @@ router.post('/signup', async (req, res) => {
  * @return AuthToken, RefreshToken
  */
 router.post('/login', async (req,res) => {
-    connect(res)
+   await connect(res)
     const username = req.body.pseudo
     const password = req.body.password
 
@@ -90,7 +90,7 @@ router.post('/login', async (req,res) => {
  * @param Refreshtoken
  */
 router.post('/refresh', async (req,res) => {
-    connect(res)
+   await connect(res)
     //On regarde si le token de refresh exist
     const refreshToken = await Refresh.findOne({
         token : req.body.token 
@@ -114,7 +114,7 @@ router.post('/refresh', async (req,res) => {
  * @param iduser
  */
 router.delete('/totallogout', async (req, res) => {
-    connect(res)
+   await connect(res)
     const refreshToken = await Refresh.findOne({
         token : req.body.token 
     })
