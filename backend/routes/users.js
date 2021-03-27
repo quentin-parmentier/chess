@@ -14,7 +14,7 @@ const connect = require('../globals/connection.js')
  * @param iduser
  */
 router.get('/', async (req, res) => {
-    await connect(res)
+    connect(res)
     const myUser = await User.findOne({ _id: req.body.iduser })
     
     //Est-ce que notre utilisateur existe ?
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/profil', async (req,res) => {
-    await connect(res)
+    connect(res)
     const myUser = await User.findOne({_id : req.body.iduser}, ['pseudo','mail'])
     if(myUser == null) return res.status(401).json({message : 'Utilisateur non trouvé'})
 
@@ -36,7 +36,7 @@ router.get('/profil', async (req,res) => {
  * @param Refreshtoken
  */
  router.delete('/logout', async (req,res) => {
-    await connect(res)
+    connect(res)
     await Refresh.deleteOne({token: req.body.token})
     res.status(202).json({message : "Vous êtes bien déconnecté"})
 })
@@ -55,7 +55,7 @@ router.put('/password', async(req, res) => {
 
     if(newPassword != confirmPassword) return res.status(401).json({message : "Les mots de passe sont différents"})
     
-    await connect(res)
+    connect(res)
     const user = await User.findOne({_id : req.body.iduser},'password')
     if(!user) return res.status(401).json({message : "Utilisateur inconnu"})
 
