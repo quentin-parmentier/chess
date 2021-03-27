@@ -1,4 +1,3 @@
 {
-    "authServ" : "http://localhost:4000/api",
-    "dataServ" : "http://localhost:3000/api"
+    "dataServ" : "https://chessoppenings.herokuapp.com/api"
 }
