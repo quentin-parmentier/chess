@@ -5,7 +5,7 @@
              (hover && !selected) ? 'text-white bg-blue-700' : '']">
         <router-link class="h-full flex justify-center items-center" :to="{ name:to, params: params}">
             <div>
-                <base-image class="h-6 m-auto" :img="icon" />
+                <base-image class="h-6 m-auto sm:hidden" :img="icon" />
                 <div class=" pt-0.5">{{text}}</div>
             </div>
         </router-link>

@@ -21,7 +21,6 @@ app.use(cors(corsOptions))
 
 //Middleware pour jwt
 var authenticateToken = function (req, res, next) {
-  console.log(req.path)
     if(req.path.indexOf(`${base}`) == -1) return next()
     const authHeader = req.headers['authorization']
     //Bearer + Token
