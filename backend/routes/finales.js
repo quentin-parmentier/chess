@@ -26,7 +26,7 @@ router.post('/', async (req,res) => {
     if(!datas.name || datas.name == "") return res.status(400).json({message : 'Le nom de la variante est obligatoire'})
     if(!datas.idEmbed || datas.idEmbed == "") return res.status(400).json({message : "L'id de la variante est obligatoire"})
 
-    connect()
+    connect(res)
 
     const myUser = await User.findOne({ _id: datas.iduser })
     
@@ -66,7 +66,7 @@ router.put('/', async (req,res) => {
     if(!datas.name || datas.name == "") return res.status(400).json({message : 'Le nom de la variante est obligatoire'})
     if(!datas.idEmbed || datas.idEmbed == "") return res.status(400).json({message : "L'id de la variante est obligatoire"})
 
-    connect()
+    connect(res)
     const myUser = await User.findOne({ _id: datas.iduser })
     
     //Est-ce que notre utilisateur existe ?
@@ -94,7 +94,7 @@ router.put('/', async (req,res) => {
  * @param idFinale
 */
 router.delete('/', async (req,res) => {
-    connect()
+    connect(res)
     const datas = req.body;
     const myUser = await User.findOne({ _id: datas.iduser })
     

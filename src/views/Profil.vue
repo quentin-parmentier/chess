@@ -24,7 +24,7 @@
     <div class="rounded-md fixed space-y-2 font-bold top-1/2 left-1/2 mt-n188 ml-n174 bg-white opacity-100 z-50 p-5 animate-pop">
       <h3 class="text-center">Voulez-vous vraiment vous déconnecter :</h3>
         <div class="flex justify-evenly">
-          <base-button label="Me déconnecter" class=" text-center p-3 " color="border-red-400 border-solid border-2 text-red-400 hover:bg-red-400 hover:text-white" @click="() => disconnect()" />
+          <base-button label="Me déconnecter" class=" text-center p-3 " color="border-red-400 border-solid border-2 text-red-400 hover:bg-red-400 hover:text-white" @click="() => disconnect(res)" />
           <base-button label="Annuler" class=" text-center p-3" @click="() => isDeconnecting = false" />
         </div>
     </div>
@@ -67,7 +67,7 @@ export default {
         changePassword(this.user)
         .finally(() => this.wait = false)
     },
-    disconnect(){
+    disconnect(res){
         disconnectUser()
         .then(() => {
             localStorage.removeItem('token')
