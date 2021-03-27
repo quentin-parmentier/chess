@@ -31,11 +31,21 @@ var authenticateToken = function (req, res, next) {
       const currentId = user.iduser
       //Pour valider l'iduser id.match(/^[0-9a-fA-F]{24}$/) car 24 caract fixé en hexa
       if(!currentId.match(/^[0-9a-fA-F]{24}$/)) return res.status(401).json({message : "Identifiant inconnu"})
-      req.body = req.body.data ?? req.body
       req.body.iduser = currentId
       next()
     })
 }
+
+var dataToBody = function(req,res,next){
+  req.body = req.body.data ?? req.body
+  next()
+}
+
+app.use(dataToBody)
+
+const authRoutes = require('./routes/auth.js')
+app.use(`${base}/auth`, authRoutes)
+
 app.use(authenticateToken)
 
 //Routes
@@ -50,9 +60,6 @@ app.use(`${base}/variantes`, variantesRoutes)
 
 const finalesRoutes = require('./routes/finales.js')
 app.use(`${base}/finales`, finalesRoutes)
-
-const authRoutes = require('./routes/auth.js')
-app.use(`${base}/auth`, authRoutes)
 
 app.use(express.static(__dirname + '/../dist/'))
 app.get(/.*/, (req, res) => res.sendFile(path.resolve(__dirname + '/../dist/index.html')))

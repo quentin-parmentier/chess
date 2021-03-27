@@ -6,9 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "auth": "nodemon ./backend/authserver.js",
-    "server": "nodemon ./backend/server.js",
-    "start": "concurrently --kill-others \"npm run auth\" \"npm run server\""
+    "start": "nodemon ./backend/server.js"
   },
   "dependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.3",
