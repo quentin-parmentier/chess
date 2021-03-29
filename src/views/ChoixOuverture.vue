@@ -9,11 +9,11 @@
         </router-link>
       </div>
       <div class="flex-1">
-        <h2 class="h2"> Ouvertures {{color == 'white' ? 'blanches' : 'noires'}}</h2>
+        <h2 class="h3 sm:h2"> Ouvertures {{color == 'white' ? 'blanches' : 'noires'}}</h2>
       </div>
       <div class=" self-center w-24 px-3 ">
         <router-link :to="{ name: 'Ouvertures', params:{color:color == 'white' ? 'black' : 'white'}}"> 
-          <base-icon-button class="transition-transform duration-300 w-12 h-12 rounded-lg transform hover:rotate-45 " :icon="color == 'white' ? 'black.svg' : 'white.svg'" /> 
+          <base-icon-button class="transition-transform duration-300 w-12 h-12 rounded-lg transform sm:hover:rotate-45 " :icon="color == 'white' ? 'black.svg' : 'white.svg'" /> 
         </router-link>
       </div>
     </div>

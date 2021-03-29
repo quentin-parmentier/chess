@@ -6,11 +6,12 @@
 			<div class=" self-center w-24 ">
 				<base-button :third="true" color='btn-return' label="Retour" prefixIcon="arrow_back.svg" @click="back()" /> 
 			</div>
-			<div class=" self-center flex-1 pr-24">
-				<h2 class="h2"> 
+			<div class=" self-center flex-1">
+				<h2 class="h3 sm:h2"> 
 					{{etude.name}}
 				</h2>
 			</div>
+			<div class="w-1/4"></div>
 		</div>
 
 		<!-- CENTER -->

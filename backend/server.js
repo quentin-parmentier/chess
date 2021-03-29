@@ -10,14 +10,14 @@ var path = require('path');
 
 //Options
 //var whitelist = ['http://localhost:8080', 'http://localhost:3000']
-//const corsOptions = {
-//  origin: '*',
-//  optionsSuccessStatus: 200
-//}
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200
+}
 
 //Middleware
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors(corsOptions))
 
 //Middleware pour jwt
 var authenticateToken = function (req, res, next) {

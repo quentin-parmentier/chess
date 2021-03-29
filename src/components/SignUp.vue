@@ -25,13 +25,14 @@
                 <svg-eye @showPsw="(show) => showPsw = show" />
             </base-input> 
             
-            <base-button class="flex justify-evenly p-3" label="M'inscrire" @click="validation" />
+            <base-button class="flex justify-evenly p-3 max-w-max mx-auto" label="M'inscrire" @click="validation" />
         </div>
         <!-- BOTTOM : Swap pour connexion  -->
         <div class="flex items-center justify-center">
             <p class=" font-semibold">J'ai déjà un compte ! </p>
             <base-button 
                 :third="true" 
+                class=" min-w-max"
                 color="btn-return" 
                 label="Je me connecte" 
                 @click="this.$emit('openLogin')" />

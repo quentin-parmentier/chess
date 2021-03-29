@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
@@ -35,7 +36,8 @@ module.exports = {
       },
       spacing: {
         "200":"200px",
-        "56":"56px"
+        "56":"56px",
+        "70":"70px"
       },
       boxShadow: {
         "basic":"#a8a7a7 5px 7px 4px 0px",
@@ -149,6 +151,13 @@ module.exports = {
         fontSize: "1.5rem",
         lineHeight: "2rem"
       },
+      '.h3' : {
+        padding:"1.5rem",
+        textAlign:"center",
+        fontWeight:"700",
+        fontSize: "1.2rem",
+        lineHeight: "2rem"
+      },
       '.h4' : {
         textAlign:"center",
         fontWeight:"400",
@@ -162,6 +171,16 @@ module.exports = {
         '&:hover':{
           color:"#4c7ce6"
         }
+      },
+      '.fab' : {
+        bottom: "85px",
+        right: '25px',
+        zIndex: '50'
+      },
+      '.fabopt2' : {
+        bottom: "50px",
+        right: 'calc(50% - 25px)',
+        zIndex: '50'
       }
     }
       addComponents(globalComponents)

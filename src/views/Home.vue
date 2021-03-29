@@ -2,7 +2,7 @@
     
     <div class="flex flex-col min-h-screen">
       <!-- TOP : Titre  -->
-      <h1 class="h1"> Finales ou Ouvertures ? </h1>
+      <h1 class="h3 sm:h1"> Finales ou Ouvertures ? </h1>
       <!-- CENTER : Différentes parties de l'application  -->
       <div class="flex-1 flexcenter">
         <router-link class="bisquare" :to="{ name: 'Finales' }">

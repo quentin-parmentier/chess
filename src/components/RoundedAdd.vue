@@ -1,7 +1,7 @@
 <template lang="">
 
     <div 
-      class=" fixed top-vh80 left-vw85 w-min rounded-full shadow-xl font-bold focus:outline-none duration-200 transform transition hover:-translate-y-0.5 hover:shadow-2xl" 
+      class=" fixed fab sm:top-vh80 sm:left-vw85 w-min rounded-full shadow-xl font-bold focus:outline-none duration-200 transform transition hover:-translate-y-0.5 hover:shadow-2xl" 
       @mouseover="() => this.isHoverAdd = true" 
       @mouseout="() => this.isHoverAdd = false">
 

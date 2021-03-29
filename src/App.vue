@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-fullvh text-gray-800 bg-gray-50">
     <top-bar class="bottom-0 sm:top-0" v-if="showBar()" />
-    <router-view :class="showBar() ? 'pb-56 sm:pt-56 sm:pb-0' : ''" />
+    <router-view :class="showBar() ? 'pb-70 sm:pt-56 sm:pb-0' : ''" />
   </div>
 </template>
 

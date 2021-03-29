@@ -19,12 +19,13 @@
                     <svg-eye @showPsw="(show) => showPsw = show" />
                 </base-input>
 
-                <base-button class="flex justify-evenly p-3" label="Me connecter" @click="validation" />
+                <base-button class="flex justify-evenly p-3 max-w-max mx-auto" label="Me connecter" @click="validation" />
             </div>
 
             <div class="flex items-center justify-center">
                 <p class=" font-semibold">Je n'ai pas encore de compte ! </p>
                 <base-button 
+                    class=" min-w-max"
                     :third="true" 
                     color=" btn-return" 
                     label="Je m'inscris" 

@@ -1,22 +1,24 @@
 <template>
 <div>
-<div class=" max-w-md m-auto min-h-fullvh flex flex-col space-y-2">
-        <p class="h2"> Mes informations de compte </p>
-        <base-input :disabled="true" :isEditable="false" label="Pseudo" :inputValue="user.pseudo" />
-        <base-input :disabled="true" :isEditable="false" label="Email" :inputValue="user.mail" />
-        <base-button :third="true" @click="() => pswChange = !pswChange"
-        label="Changer mon mot de passe" color="btn-return ml-0 pl-0" />
-        <div v-if="pswChange" class=" bg-gray-100 rounded space-y-1">
-            <base-input :isEditable="false" label="Actuel" v-model:inputValue="user.pswActu" @focusout="vMdp" :error="errors.mdp" />
-            <base-input :isEditable="false" label="Nouveau" v-model:inputValue="user.pswNew" @focusout="vIdentique" :error="errors.pswNew" />
-            <base-input :isEditable="false" label="Confirmer" v-model:inputValue="user.pswConfirm" @focusout="vIdentique" :error="errors.pswConfirm" />
-            <base-button class="flex justify-evenly py-1" label="Changer" @click="vChange"/>
-        </div>
-        <base-button :third="true" label="Me déconnecter" 
-        color="text-red-500 ml-0 pl-0 hover:text-red-600" 
-        @click="() => isDeconnecting = true"
-        @annuler="() => isDeconnecting = false"/>
+  <h2 class="h3 sm:h2"> Mes informations de compte </h2>
+  <div class="mx-3">
+    <div class="max-w-md flex flex-col space-y-2 m-auto">
+      <base-input :disabled="true" :isEditable="false" label="Pseudo" :inputValue="user.pseudo" />
+      <base-input :disabled="true" :isEditable="false" label="Email" :inputValue="user.mail" />
+      <base-button :third="true" @click="() => pswChange = !pswChange"
+      label="Changer mon mot de passe" color="btn-return ml-0" />
+      <div v-if="pswChange" class=" bg-gray-100 rounded space-y-1">
+          <base-input :isEditable="false" label="Actuel" v-model:inputValue="user.pswActu" @focusout="vMdp" :error="errors.mdp" />
+          <base-input :isEditable="false" label="Nouveau" v-model:inputValue="user.pswNew" @focusout="vIdentique" :error="errors.pswNew" />
+          <base-input :isEditable="false" label="Confirmer" v-model:inputValue="user.pswConfirm" @focusout="vIdentique" :error="errors.pswConfirm" />
+          <base-button class="flex justify-evenly py-1" label="Changer" @click="vChange"/>
+      </div>
+      <base-button :third="true" label="Me déconnecter" 
+      color="text-red-500 ml-0 hover:text-red-600" 
+      @click="() => isDeconnecting = true"
+      @annuler="() => isDeconnecting = false"/>
     </div>
+  </div>
 
     <!-- FENETRE MODAL POUR SUPPRIMER LA VARIANTE -->
   <div v-if="isDeconnecting">

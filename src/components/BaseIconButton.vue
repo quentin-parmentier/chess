@@ -16,6 +16,12 @@ export default {
   created () {
     this.iconB = require('../assets/img/'+this.icon)
   },
+  watch: {
+    icon : function(){
+      this.iconB = require('../assets/img/'+this.icon)
+    }
+  },
+
   props: {
     icon:{
         type: String,

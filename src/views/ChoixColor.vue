@@ -8,7 +8,7 @@
             <base-button :third="true" color='btn-return' label="Retour" prefixIcon="arrow_back.svg" /> 
           </router-link>
         </div>
-        <h1 class="h1 flex-1"> Les ouvertures </h1>
+        <h1 class="h3 sm:h1 flex-1"> Les ouvertures </h1>
         <div class="w-1/4"></div>
       </div>
                     <!-- Choix de couleur  -->

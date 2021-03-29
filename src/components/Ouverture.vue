@@ -8,11 +8,11 @@
             <div class=" h-full w-28">
               <img :src="ouverture.img || imgHolder " ref="img" :onerror="() => changeImg()" alt="Openning icon" class="h-full rounded-l-md object-cover">
             </div>
-            <div class=" flex-1 pl-12 self-center break-all">
+            <div class=" flex-1 pl-2 sm:pl-12 self-center break-all">
               <div class=" font-bold text-xl">
                 {{ouverture.name}}
               </div>
-              <div class=" font-semibold text-sm text-gray-400 pl-4 mt-1 break-all">
+              <div class=" font-semibold text-sm text-gray-400 pl-2 sm:pl-4 mt-1 break-all">
                 {{ouverture.commentaire}}
               </div>
             </div>
